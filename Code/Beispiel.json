@@ -1,0 +1,11 @@
+{
+	"String": "Variable123",
+	"Boolean": true;
+	"Nullwert": null,
+	"Zahl": 1234567
+	"Fliesskomma": 1.23e+6,
+	"Array": ["Beispiel", "fuer","Array"],
+	"Objekt": {
+		"Zahl_2": "1234",
+	}
+}
