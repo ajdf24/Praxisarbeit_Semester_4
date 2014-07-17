@@ -1,0 +1,28 @@
+\section{Objektserialisierung nach JSON}
+Wie in der Aufgabenstellung im Kapitel \ref{Aufgabenstellung} vorgegeben, sollen hier nun die M\"oglichkeiten einer Serialisierung von Java-Objekten in \ac{JSON} untersucht werden.
+
+\subsection{Was ist Serialisierung}
+Serialisierung ist die Abbildung von Daten auf eine geeignete Darstellungsform und wird oft bei verteilten Softwarel\"osungen wie im Falle von \ac{GDS} verwendet. Der erzeugte Datenstrom kann dann entweder \"uber ein Netzwerk \"ubertragen oder lokal gespeichert werden. Somit liegt das Objekt doppelt vor, zum einen als reales Objekt eines Programms und als serialisiertes Objekt. Eine \"Anderung des Objekts im Programm hat somit keine Auswirkung auf das serialisierte Objekt. \cite{WikiSeri}
+
+Im Rahmen dieser Arbeit hei\ss{}t das \ac{OPM} konforme strukturierte Java-Objekte in einen \ac{JSON}-Datenstrom zu wandeln. 
+
+\subsection{M\"oglichkeiten der JSON-Serialisierung in Java}
+Grunds\"atzlich gibt es verschiedene M\"oglichkeiten eine \ac{JSON}-Serialisierung in Java 
+durchzuf\"uhren. Im folgenden werden die im Projektteam diskutierten M\"oglichkeiten genauer vorgestellt. 
+
+\subsection{Eigener Ansatz}
+Eine M\"oglichkeit einen Funktionsf\"ahigen Serialisierer zu erhalten, ist diesen selber zu schreiben. Hierf\"ur m\"usse eine Lesefunktion f\"ur \ac{JSON}-Objekte implementiert werden, was auch als Scanner bezeichnit wird. 
+
+Dieser Scanner muss in der Lage sein einen \ac{JSON}-Datenstrom zu lesen und ihn in die einzelnen Bestandteile aufspalten.
+
+Eine weitere Funktion die erf\"ullt werden muss, ist die eines Parsers. Dieser muss die einzelnen vom Scanner erkannten Bestandteile in Javaobjekte umwandeln.
+
+Bei der Implementierung muss des weiteren zum Beispiel auf Rekursion und nicht valide \ac{JSON}-Objekte geachtet werden.
+\subsection{Flexjson}
+Flexjson ist eine einfache Bibliothek f\"ur das Serialisieren und Deserialisieren von \ac{JSON}-Objekten in Javaobjekte.
+
+Wenn Attributnamen in \ac{JSON} von dem Deklarationsnamen im Javaobjekt abweichen sollen, m\"ussen Annotationen verwendet werden.
+
+Nachteilig ist das beim Serialisieren immer explizit angegeben werden muss wenn geschachtelte Objekte mit serialisiert werden sollen.
+\subsection{Jackson}
+Jackson ist 

@@ -1,7 +1,8 @@
 \section{JavaScript Object Notation}
-\ac{JSON} ist ein Textbasiertes Format zum Datenaustausch, wobei jedes gültige JSON-Dokument auch ein gültiges JavaScript ist. Es wurde als Ersatz für XML geschaffen und wird hauptsächlich in Bereichen eingesetzt wo Ressourcen wie Speicherplatz, Prozessorleistung und Netzwerkverbindung stark limitiert sind. \cite{WikiJSON}
+\ac{JSON} ist ein Textbasiertes Format zum Datenaustausch, wobei jedes gültige JSON-Dokument auch ein gültiges JavaScript ist. Es wurde als Ersatz für XML geschaffen und wird hauptsächlich in Bereichen eingesetzt wo Ressourcen wie Speicherplatz, Prozessorleistung und Netzwerkverbindung stark limitiert sind. Im Aufbau erinnert \ac{JSON}  an die Struktur eines Arrays. Ein Beispiel für ein \ac{JSON}-Objekt ist im Kapitel \ref{Der Aufbau von JSON} zu finden. \cite{WikiJSON}
 
 \subsection{Der Aufbau von JSON}
+\label{Der Aufbau von JSON}
 Ein Beispiel für ein gültiges JSON-Dokument ist im Beispiel unten zu finden. In der ersten und letzten Zeile sind geschweifte Klammern zu finden, da jedes JSON-Dokument ein Objekt ist und Objekte in JSON von geschweiften Klammern umschlossen werden müssen. \cite{Sai13}
 
 JSON ist nach dem Schlüssel/Wert Prinzip aufgebaut  was bedeutet, dass jedem Schlüssel genau ein Wert zugeordnet werden kann. Im Beispiel sind alle in JSON möglichen Formattypen aufgezeigt.
@@ -9,7 +10,17 @@ JSON ist nach dem Schlüssel/Wert Prinzip aufgebaut  was bedeutet, dass jedem Sch
 Zeile zwei enthält einen String, eine Zeichenkette in der jedes Zeichen erlaubt ist. Der boolsche Wert wird genau wie ein Nullwert ohne Anführungszeichen geschrieben wie in den Zeilen drei und vier gezeigt.
 
 Zahlen können Ganzzahlig, Fließkommazahlen oder Exponentialzahlen sein wie sie auch im Beispiel zu finden sind.
+
 Ein Array kann mehrere Werte enthalten und wird deshalb von eckigen Klammern umschlossen.  Die eigentlichen Werte im Array müssen jedoch vom selben Typ sein.
 
 Objekte können wiederum Objekte enthalten, wie es in den Zeilen acht bis zehn dargestellt ist. Das innere Objekt wird wieder von geschweiften Klammern umschlossen.
+
+Somit können sechs Datentypen in JSON Unterschieden werden Strings, Zahlen, Booleans, Arrays, Objekte und Nullwerte. Zu beachten ist das Booleans, Nullwerte und Zahlen ohne Anführungszeichen beschrieben werden.
+
 \lstinputlisting{Code/Beispiel.json}
+
+\subsection{JSON in Verbindung mit Programmiersprachen}
+Viele Programmiersprachen wie PHP, Python, C\#, C++ und Java unterstützen JSON sehr gut und sogar Nativ. 
+
+\subsubsection{JSON und JavaScript}
+JSON wird unter JavaScript als ganz normale Variable geführt und kann auch als solche ausgelesen werden. Dies geschieht beispielhaft über das Kommando \texttt{alert(JSONVariablenName.Zahl);} liefert den Wert 1234567 aus dem Beispiel, unter der Bedingung das, dass JSON-Objekt als Variable \texttt{JSONVariablenName} deklariert wurde, zurück.
