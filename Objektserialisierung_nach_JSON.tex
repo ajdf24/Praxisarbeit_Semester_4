@@ -25,4 +25,25 @@ Wenn Attributnamen in \ac{JSON} von dem Deklarationsnamen im Javaobjekt abweiche
 
 Nachteilig ist das beim Serialisieren immer explizit angegeben werden muss wenn geschachtelte Objekte mit serialisiert werden sollen.
 \subsection{Jackson}
-Jackson ist 
+Jackson ist \"ahnlich wie Flexjson eine Bibliothek f\"ur die Serialisierung von Javaobjekten zu \ac{JSON}-Objekten. Vorteilhaft an Jackson ist das die Bibliothek modular aufgebaut ist. So ben\"otigt man f\"ur einzelne Aufgaben nicht die gesamte Bibliothek.
+
+Ein weiterer Vorteil ist, dass es \"uber ein Jackson-Modul m\"oglich ist Annotationen von der \ac{JAXB} zu verwenden. Was es erm\"oglicht f\"ur die \ac{JAXB} und Jackson Serialisierung die selben Annotationen zu nutzen. Dies w\"urde die Bearbeitung und die \"Ubersichtlichkeit sehr vereinfachen, da nicht zwei unterschiedlichen Annotationen benutzt werden m\"ussen.
+\subsection{Auswertung der M\"oglichkeiten}
+In einer Projektgruppenberatumg wurden alle drei Vorschl\"age ausf\"uhrlich erl\"autert und diskutiert. 
+
+Vorteil des eigenen Ansatzes ist es zum einen, dass man hier v\"ollig frei von fremden Bibliotheken ist und man keine zus\"atzlichen "`technischen Schulden"' aufnehmen muss. Zum anderen ist des sehr Aufw\"andig eigen Klassen f\"ur die Serialisierung und Deserialisierung zu schreiben und dies ist im Rahmen dieser Arbeit leider nicht m\"oglich.
+
+Aus diesem Grund schied eigene Ansatz recht fr\"uh aus.
+
+Der zweite Ansatz \"uber die Flexjson Bibliothek ist interessant, und wurde in der Gruppe lange diskutiert. Denn hiermit ist es m\"oglich expliziert anzugeben welche Attribute serialisiert werden sollen, und welche nicht, wie es sp\"ater einmal vorgesehen werden soll.
+
+Im letzten Ansatz mit Jackson ist es wie bei \ac{JAXB} m\"oglich den Serialisierer \"uber Annotationen zu steuern. Vorteilhaft ist es vor allem, dass der Jackson und \ac{JAXB} Serialisierer die selben Annotationen managen kann. 
+
+Dies war am Schluss auch das entscheidende Element warum sich f\"ur eine Umsetzung mit Jackson und \ac{JAXB} entschieden wurde. 
+
+Diese Arbeit behandelt jedoch nur die Jackson beziehungsweise \ac{JSON} Verarbeitung. In einer anderen Arbeit die Zeitgleich entstand, ist die Verarbeitung mit \ac{JAXB} und XML zu finden. \cite{Wal14} 
+
+\subsection{Fragestellungen nach der Besprechung}
+Wie schon erw\"ahnt sollen nicht immer alle Attribute serialisiert werden. Ob, und wies mit Jackson m\"oglich ist, wird im weiteren Verlauf der Arbeit gekl\"art. 
+
+Des weiteren kam die Frage auf, ob es m\"oglich ist Klassenattribute gesondert zu Serialisieren und gegebenen Falls zu untersuchen wie sich dies auf die Serialisierungs- beziehungsweise Deserialisierungsgeschwindigkeit auswirkt.
