@@ -1,2 +1,12 @@
 \section{Jackson und das Jackson Projekt}
-Das Jackson Projekt entwickelt einen kostenlosen 
+Das Jackson Projekt entwickelt eine freie und modulare Bibliothek f\"ur die Serialisierung und Deserialisierung von Java-Instanzen in \ac{JSON}-Dokumente. Jackson wird unter der Contributor License Agreement (CLA) vermarktet. Die zur Zeit aktuelle Version ist 2.4.1, welche auch bei der Bearbeitung des Projektes eingesetzt wird.
+
+\subsection{Jackson-Module}
+Die Jackson-Bibliothek besteht aus drei Hauptmodulen, welche wie folgt bezeichnet sind:
+\begin{itemize}
+ \item "`jackson-core"' welches die JSON spezifische Implementierung sowie eine low-level streaming API enth\"alt
+ \item "`jackson-annotations"' welches die Jackson spezifischen Annotationen enth\"alt.
+ \item "`jackson-databind"' welches f\"ur das \textit{databind} verantwortlich ist.
+\end{itemize}
+Unter Databind wird eine Methode verstanden, welche \"uber ein User-Interface gesteuert werden kann.
+Diese Methode ist in der Lage Daten aus einem Datenstrom wie zum Beispiel einem JSON-File zu lesen oder zu schreiben.
