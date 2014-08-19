@@ -23,6 +23,7 @@
 % \usepackage{subscript}
 % zum tiefstellen
 \usepackage{lscape}
+\usepackage{pdflscape}
 % zum drehen der Seite
 % \usepackage[super]{natbib}
 \usepackage[square,sort,comma,numbers]{natbib}
@@ -31,25 +32,20 @@
 % Umbruch für URL
 \usepackage{pst-3dplot}
 % für tex Grafiken nötig
+\usepackage{pstricks}
 \usepackage{listings}
 % für das einfügen von Quelltext
 \definecolor{codegray}{rgb}{0.92,0.92,0.92}
-\lstset{basicstyle=\fontsize{9}{11}\selectfont\ttfamily, breaklines=true, backgroundcolor=\color{codegray}, numbers=left, numberstyle=\tiny, tabsize=4}
-% \lstset {
-%  frame=shadowbox,
-%  rulesepcolor=\color{black},
-%  showspaces=false,showtabs=false,tabsize=2,
-%  numberstyle=\tiny,numbers=left,
-%  basicstyle= \listingsfont,
-%  stringstyle=\color{sh_string},
-%  keywordstyle = \color{sh_keyword}\bfseries,
-%  commentstyle=\color{sh_comment}\itshape,
-%  captionpos=b,
-%  xleftmargin=0.7cm, xrightmargin=0.5cm,
-%  lineskip=-0.3em,
-%  escapebegin={\lstsmallmath}, escapeend={\lstsmallmathend},
-%  language=java
-% }
+\lstset{basicstyle=\fontsize{9}{11}\selectfont\ttfamily, breaklines=true, backgroundcolor=\color{codegray}, numbers=left, numberstyle=\tiny, tabsize=4, language=java}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\lstset{
+commentstyle=\color{mygreen},
+keywordstyle=\color{mymauve},
+language=Java,
+stringstyle=\color{blue}
+}
+
 
 %Einstellungen für Quellcode
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm]{geometry}
@@ -100,6 +96,8 @@
 \usepackage{hyperref}
 % klickbare links
 
+% \usepackage{pdfpages}
+\usepackage{rotating}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Angaben zur Arbeit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
