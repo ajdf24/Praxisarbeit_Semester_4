@@ -1,2 +1,18 @@
-\section{Der SMD-Assistent}
-sdhkfysdhfhhkgbs
+\section{Der SMD-Assistent im GDS-System}
+Die \ac{SMD} enthalten alle wichtigen Informationen um die Strucktur einer Klasse zu beschreiben. Diese Klasseninformationen sollen sp\"ater von einem SMD-Assistent verwaltet werden.
+
+In einer MySQL-Datenbank k\"onnen alle Klasseninformationen abgelegt werden. Zu diesen Informationen z\"ahlen zum Beispiel der Klassenname, Attribute mit Modifier, Methoden mit Modifier Parametern und R\"uckgabetyp. 
+
+Da es sich bei den \ac{SMD} um reine Metadaten handelt, werden keine Methodenr\"umpfe in die \ac{SMD}-Datenbank aufgenommen.
+
+Der Nutzer des \ac{GDS}-Systems gibt \"uber den \ac{UDDE}, also das User Interface, seine Klassen und \ac{AMD} in das System.
+Unter \ac{AMD} werden die zu seinen Klassen passenden Instanzen bezeichnet, welche der User der Anwendung zum Speichern \"ubergibt.
+
+Der SMD-Assistent ist also f\"ur das Umwandeln von Klassen in \ac{SMD}s verantwortlich. Nach dem erstellen der \ac{SMD}s werden diese zur Aufbewahrung vom Assistenten dem \ac{GDS} \"ubergeben, welcher die Ablage der Daten in einer Datenbank verwaltet.
+
+Die \ac{SMD}s werden von der Anwendung an verschiedenen Stellen ben\"otigt. Der \ac{CG} wandelt die \ac{SMD}s wieder in Java-Klassen, welche OPM-Konform erzeugt werden. Bei den erstellten Klassen handelt es sich nat\"urlich nur um einfache Ger\"uste, aber mehr wird f\"ur eine Serialisierung beziehungsweise Deserialisierung nicht ben\"otigt.
+Die generierten Datenstr\"ome werden dann ebenfalls vom \ac{GDS} in einer Datenbank gespeichert.
+
+Der \ac{IG} erstellt aus den vom SMD-Assistenten gelieferten \ac{SMD}s Schemen f\"ur JSON und XML. Eine Funktion zur Erstellung des JSON-Schemas aus einer Klasse wird in Kapitel \ref{JSON-Schema} beschreiben.
+
+

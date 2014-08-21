@@ -60,6 +60,47 @@ Ein vollst\"andiger \"Uberblick ist im Klassendiagramm unten zu finden gegeben.
 \caption{Klassendiagramm der Serialisierung} 
 \end{figure}
 
+\subsection{JSON-Schema Erstellung aus einer Klasse}\label{JSON-Schema}
+\"Ahnlich bei auch bei XML gibt es in JSON ein Datenformat, welches die zu erwartende Form des Streams vorgibt.
+Wie auch in XSD wird das Schema in der eigenen Norm als konformes Dokument erstellt.
+
+Ein Beispiel f\"ur ein JSON-Schema wird hier Anhand des JSON-Dokuments in Kapitel \ref{Der Aufbau von JSON} dargestellt.
+Das JSON-Schema besteht aus einem Objekt, welches die jeweiligen Namen und Werte der Attribute einer Instanz enth\"alt.
+
+Somit steht am Anfang eines JSON-Schemas immer der Bezeichner \texttt{type} mit dem entsprechenden Wert, n\"amlich \texttt{object}.
+Unter dem Schl\"ussel \texttt{properties} sind wiederum als inneres Objekt die Attribute mit ihren m\"oglichen auspr\"agungen aufgelistet. 
+
+Am Anfang einer Propertie steht der Attributname \texttt{"}\texttt{String"}, wie im Beispiel unten.
+Gefolgt wird dieser Name von einem Objekt, welches die genauen Eigenschaften des Attributs beschreibt.
+Im Beispiel wird einfach nur der Typ des Attributs bezeichnet, jedoch ist auch m\"oglich weitere Einschr\"ankungen \"uber Annotationen zu machen. Mit dessen Hilfe k\"onnte man zum Beispiel einen Wertebereich f\"ur Zahlen angeben.
+
+Um die XML-Annotationen von JAXB bei der Schemaerzeugung zu nutzen muss wieder ein \texttt{AnnotationInspector} verwendet werden.
+
+Die Einschr\"ankungen und Beschreibungen der Attribute werden dem Serializer mit Hilfe der Annotationen \"ubergeben, welche Java-Methoden-Namen enthalen . Das setzen der Beschreibungen geschieht \"uber Java-Methoden welche zur Laufzeit vom Serializer aufgerufen werden.
+
+Auf die Erkl\"arung der einzelnen Annotationen von JAXB wird an dieser stelle verzichtet, da dieses Thema zu Umfangreich ist um es in dieser Arbeit abzuhandeln. 
+
+\lstinputlisting{Code/JSON_Schema.json}
+
+\subsection{JSON-Schema mit Hilfe von Jackson erstellen}
+Seit der Jackson Version 2.2 wurde das Modul zur Erstellung eines JSON-Schemas aus dem Modul "`jackson-databind"' ausgegliedert und ein eigenes Modul mit erweitertem Funktionsumfang eingef\"uhrt. 
+
+F\"ur die Erstellung eines JSON-Schemas wird somit das Zusatzmodul \\"`jackson-module-jsonSchema"' ben\"otigt. Um unn\"otige Fehlerquellen zu vermeiden wurde auch dieses Modul in der Version 2.4.1 verwendet, auch wenn es zum Erstellungsdatum schon eine neuere Version gab. Somit sind alle Module von der selben Version und Fehler durch Versionsunterschiede sind ausgeschlossen.
+
+Wie schon in fr\"uheren Beispielen gezeigt wird zu erst wieder ein \texttt{ObjectMapper} erstellt. Hierbei kann eine JsonMappingException auftreten, welche entweder weiter gewurfen werden kann oder dirket behandelt wird.
+Des weiteren wird f\"ur die Schemaerzeugung noch ein \\\texttt{SchemaFactoryWrapper} erstellt, welcher das Schema erstellt.
+Der Schema-Wrapper kann unter umst\"anden die JsonProcessingException werfen.
+
+Dem Wrapper wird nun \"uber den n\"achsten Methodenaufruf auf den Mapper und die entsprechend zu Mappende Instanz angesetzt. Dies geschieht \"uber die Methode \\\texttt{acceptJsonFormatVisitor}.
+
+Mittels der Methode \texttt{finalSchema} wird das Schema der Instanz als \texttt{JsonSchema} erstellt.
+
+\"Uber den \texttt{return}-Wert wird das \texttt{JsonSchema} als String \"ubergeben.
+
+Im Codebeispiel unten wird dieser Zusammenhang noch einmal verdeutlicht.
+
+\lstinputlisting{Code/generateSchema.java}
+
 \subsection{Auff\"alligkeiten beim Testen}
 Beim Serialisieren und Deserialisieren sollen Attribute in JSON-Dokumenten gespeichert werden. Hief\"ur ben\"otigen alle Klassen einen Standard-Konstruktor damit der Serializer diesen Aufrufen kann. 
 
@@ -72,5 +113,5 @@ In ersten Tests mit dem JSONSerializer wurde die Funktionsf\"ahigkeit bewiesen. 
 
 Im Projekt aber sollen unterschiedlichste Klassen deserialisiert werden k\"onnen. Das wirft die Frage auf wie Festgestellt wird, um welche Klasse es sich bei der Instanz handelt. Dieser Punkt wird nun in den folgenden Kapiteln ausf\"uhlich erl\"autert.
 
-
-
+\subsubsection{Auff\"alligkeiten beim erstellen des JSON-Schemas}
+Nach einigen Tests wurde festgestellt, das Jackson f\"ur alle Zahlen immer \texttt{integer} im Schema angibt, obwohl JSON auch \texttt{double} oder \texttt{float} kennt. Egal ob es sich in der Klasse um \texttt{float, double} oder  \texttt{integer} handelt. Warum dies im Schema nicht Ordnungsgem\"a\ss{} \"ubernommen wird, konnte nach einiger recherche nicht herausgefunden werden.

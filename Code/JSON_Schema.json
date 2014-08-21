@@ -1,0 +1,32 @@
+{
+	"type":"object",
+	"proterties":{
+		"String":{
+			"type":"string"
+		},
+		"Boolean":{
+			"type":"boolean"
+		},
+		"Nullwert":{
+			"type":"string"
+		},
+		"Zahl":{
+			"type":"integer"
+		},
+		"Fliesskomma":{
+			"type":"integer"
+		},
+		"Array":{
+			"type":"array",
+			"items":{
+				"type":"string"
+			}
+		},
+		"Object":{
+			"type":"object",
+			"properties":{
+				"Zahl_2":"integer"
+			}
+		}
+	}
+}
