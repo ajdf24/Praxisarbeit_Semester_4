@@ -53,7 +53,6 @@ Diese Methode nutzt nun bei Aufruf die \texttt{serialize}-Methode des jeweiligen
 
 Ein vollst\"andiger \"Uberblick ist im Klassendiagramm unten zu finden gegeben.
 
-
 \FloatBarrier
 \begin{figure}[ht]
 \includegraphics[width=16cm]{Bilder/Erstes_EKD}
@@ -61,6 +60,17 @@ Ein vollst\"andiger \"Uberblick ist im Klassendiagramm unten zu finden gegeben.
 \caption{Klassendiagramm der Serialisierung} 
 \end{figure}
 
+\subsection{Auff\"alligkeiten beim Testen}
+Beim Serialisieren und Deserialisieren sollen Attribute in JSON-Dokumenten gespeichert werden. Hief\"ur ben\"otigen alle Klassen einen Standard-Konstruktor damit der Serializer diesen Aufrufen kann. 
+
+Des weiteren ben\"otigt der Serializer f\"ur alle nicht \texttt{public} Attribute Getter- und Settermethoden um Zugriff auf diese Attribute zu erhalten. Denn der Serializer darf durch Java-Richtlinien nur auf \texttt{public} Attribute ohne Getter- und Settermethoden zugreifen.
+
+Um eine Serialisierung von allen Klassen zu gew\"arleisten muss eventuell das OPM-Modell angepasst werden.
+Da alle Klassen sich an die OPM-Regeln halten, ist somit gew\"ahrleistet das alle ankommenden Instanzen serialisiert oder deserialisiert werden k\"onnen.
+
+In ersten Tests mit dem JSONSerializer wurde die Funktionsf\"ahigkeit bewiesen. Jedoch ist der derzeitige Stand des Serialisierers noch nicht in der Lage verschiedene Klassen zu deserialisieren. Bisher ist der Klassenname fest vorgebeben.
+
+Im Projekt aber sollen unterschiedlichste Klassen deserialisiert werden k\"onnen. Das wirft die Frage auf wie Festgestellt wird, um welche Klasse es sich bei der Instanz handelt. Dieser Punkt wird nun in den folgenden Kapiteln ausf\"uhlich erl\"autert.
 
 
 
