@@ -5,6 +5,7 @@ public String generateSchema(OPMObject opmObject) throws JsonProcessingException
 		m.acceptJsonFormatVisitor(m.constructType(opmObject.getClass()), 
 			visitor);
 		JsonSchema jsonSchema = visitor.finalSchema();
+		
 		return m.writerWithDefaultPrettyPrinter().
 			writeValueAsString(jsonSchema);
 }
