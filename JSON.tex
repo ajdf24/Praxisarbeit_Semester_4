@@ -1,26 +1,35 @@
 \section{JavaScript Object Notation}
-\ac{JSON} ist ein Textbasiertes Format zum Datenaustausch, wobei jedes gültige JSON-Dokument auch ein gültiges JavaScript ist. Es wurde als Ersatz für XML geschaffen und wird hauptsächlich in Bereichen eingesetzt wo Ressourcen wie Speicherplatz, Prozessorleistung und Netzwerkverbindung stark limitiert sind. Im Aufbau erinnert \ac{JSON}  an die Struktur eines Arrays. Ein Beispiel für ein \ac{JSON}-Objekt ist im Kapitel \ref{Der Aufbau von JSON} zu finden. \cite{WikiJSON}
+\ac{JSON} ist ein textbasiertes Format zum Datenaustausch, wobei jedes gültige JSON-Dokument auch ein gültiges JavaScript ist. Jedoch ist \ac{JSON} unabh\"angig von der Programmiersprache. Es wurde als Ersatz für XML geschaffen und wird hauptsächlich in Bereichen eingesetzt wo Ressourcen wie Speicherplatz, Prozessorleistung und Netzwerkverbindung stark limitiert sind. Im Aufbau erinnert \ac{JSON}  an die Struktur eines Arrays. Ein Beispiel für ein \ac{JSON}-Objekt ist im Kapitel \ref{Der Aufbau von JSON} zu finden. \cite{WikiJSON}
 
 \subsection{Der Aufbau von JSON}
 \label{Der Aufbau von JSON}
-Ein Beispiel für ein gültiges JSON-Dokument ist im Beispiel unten zu finden. In der ersten und letzten Zeile sind geschweifte Klammern zu finden, da jedes JSON-Dokument ein Objekt ist und Objekte in JSON von geschweiften Klammern umschlossen werden müssen. \cite{Sai13}
+Ein gültiges JSON-Dokument ist im Beispiel unten zu finden. In der ersten und letzten Zeile sind geschweifte Klammern zu finden, da jedes JSON-Dokument ein Objekt, im Sinne von JSON-Objekten, ist und Objekte in JSON von geschweiften Klammern umschlossen werden müssen. \cite{Sai13}
 
 JSON ist nach dem Schlüssel/Wert Prinzip aufgebaut  was bedeutet, dass jedem Schlüssel genau ein Wert zugeordnet werden kann. Im Beispiel sind alle in JSON möglichen Formattypen aufgezeigt.
 
-Zeile zwei enthält einen String, eine Zeichenkette in der jedes Zeichen erlaubt ist. Der boolsche Wert wird genau wie ein Nullwert ohne Anführungszeichen geschrieben wie in den Zeilen drei und vier gezeigt.
+Zeile zwei enthält einen String, eine Zeichenkette in der jedes Zeichen erlaubt ist. Der boolsche Wert wird genau wie ein Nullwert ohne Anführungszeichen geschrieben wie in den Zeilen 3 und 4 gezeigt.
 
-Zahlen können Ganzzahlig, Fließkommazahlen oder Exponentialzahlen sein wie sie auch im Beispiel zu finden sind.
+Zahlen können ganzzahlig, Fließkommazahlen oder Exponentialzahlen sein.
 
 Ein Array kann mehrere Werte enthalten und wird deshalb von eckigen Klammern umschlossen.  Die eigentlichen Werte im Array müssen jedoch vom selben Typ sein.
 
 Objekte können wiederum Objekte enthalten, wie es in den Zeilen acht bis zehn dargestellt ist. Das innere Objekt wird wieder von geschweiften Klammern umschlossen.
 
-Somit können sechs Datentypen in JSON Unterschieden werden Strings, Zahlen, Booleans, Arrays, Objekte und Nullwerte. Zu beachten ist das Booleans, Nullwerte und Zahlen ohne Anführungszeichen beschrieben werden.
+Somit können sechs Datentypen in JSON Unterschieden werden Strings, Zahlen, Booleans, Arrays, Objekte und Nullwerte. Zu beachten ist das Booleans, Nullwerte und Zahlen ohne Anführungszeichen geschrieben werden.
 
+Ein Beipiel f\"ur eine zu serialisierende Klasse, ohne Annotationen f\"ur einen Serialisierer, k\"onnte wie folgt aussehen. Worum es sich bei Annotationen genau handelt wird im Kapitel \ref{Jackson} genauer beschrieben. 
+\lstinputlisting{Code/Java_Bsp_f\"ur_JSON.java}
+
+\newpage
+Das selbe Beispiel als serilalisiertes JSON-Objekt w\"urde dann wie folgt aussehen k\"onnen.
+Je nachdem, mit welcher Biliotheke Serialisiert wird, beziehungsweise welche Annotationen an den Quellcode noch zus\"atzlich angebracht sind, kann das JSON-Objekt auch anders aussehen.
 \lstinputlisting{Code/Beispiel.json}
 
 \subsection{JSON in Verbindung mit Programmiersprachen}
-Viele Programmiersprachen wie PHP, Python, C\#, C++ und Java unterstützen JSON sehr gut und sogar Nativ. 
+Viele Programmiersprachen wie PHP, Python, C\#, C++ und Java unterstützen JSON sehr gut und sogar nativ. Dies bedeutet, das f\"ur eine grundlegende Verwendung von JSON keine zus\"atzlichen Bibliotheken ben\"otigt werden. 
+
+Eine Verwendung von JSON ohne einen speziellen Anwendungsfall, der wirklich JSON-Objekte ben\"otigt, wie das Verwenden von Jackson oder MongoDB, ist wenig Sinnvoll. Eine Kapselung von Information in JSON, ist somit nur Sinnvoll wenn auch bestimmte Programmteile daf\"ur ausgelegt sind mit ihnen zu arbeiten.
+% das Speichern von Informationen in JSON sonnst umst\"andlich ist und viele Umwandlungsschritte ben\"otigt. Ohne speziellen Anwendungsfall ist die Verwendung von Standartdatentypen in der Regel vorzuziehen.
 
 \subsubsection{JSON und JavaScript}
-JSON wird unter JavaScript als ganz normale Variable geführt und kann auch als solche ausgelesen werden. Dies geschieht beispielhaft über das Kommando \texttt{alert(JSONVariablenName.Zahl);} liefert den Wert 1234567 aus dem Beispiel, unter der Bedingung das, dass JSON-Objekt als Variable \texttt{JSONVariablenName} deklariert wurde, zurück.
+JSON wird unter JavaScript als ganz normale Variable geführt und kann auch als solche ausgelesen werden. Dies geschieht beispielhaft über das JavaScript-Kommando \texttt{alert(JSONVariablenName.Zahl)}. Der Aufruf liefert den Wert 1234567 aus dem Beispiel, unter der Bedingung, dass das JSON-Objekt als Variable mit dem Namen \texttt{JSONVariablenName} im JavaScript deklariert wurde, zurück.

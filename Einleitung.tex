@@ -3,7 +3,7 @@ Die folgende Arbeit befasst sich mit der Serialisierung von Datenobjekten in JSO
 \subsection{Generisches Managementsystem f\"ur Energiedaten}
 Das \ac{GDS} verwendet Objekte um Anwendungsdaten zu verwalten, die einem \ac{OPM} genügen und durch \ac{SMD} beschrieben werden k\"onnen.
 Das \ac{GDS} wird zur Zeit im \ac{IAI} des \ac{KIT} entwickelt und ist ein System generischer Datenservices welches bei 
-Release vollautomatisch Energiedaten managen k\"onnen soll. 
+Vertrigstellung vollautomatisch Energiedaten managen soll. 
 
 Durch den generischen Charakter kann es aber auch Daten aus anderen Bereichen verwalten, wenn diese dem \ac{OPM}-Modell gen\"ugen.
 \subsection{Objektorientiertes Datenmodell}
@@ -11,17 +11,19 @@ Im \ac{OPM}  werden Richtlinien für die Entwicklung von allen objektorientierten
 
 Im Folgenden sind die wichtigsten OPM-Regeln dargstellt:
 \begin{itemize}
- \item Basisklasse \texttt{OPMObject} von der alle Klassen Erben
+ \item Basisklasse \texttt{OPMObject} von der alle Klassen erben
  \item Es gibt keine Konstanten
- \item Attribute sind Grunds\"atzlich \texttt{private} und werden durch Getter- und Setter-Methoden aufgerufen
+ \item Attribute sind grunds\"atzlich \texttt{private}, also von auserhalb der Klasse nicht \"anderbar, und werden gegebenenfalls durch Getter- und Setter-Methoden aufgerufen
  \item Programme bestehen nur aus Objekten, der Aufruf erfolgt ausschlie\ss{}lich \"Uber Methodenaufrufe
- \item Bezeichner werden im "`Camel Case"' formuliert
+ \item Es k\"onnen Standarddatentypen verwendet werden
+ \item Methodenbezeichner werden im "`Camel Case"' formuliert
+ \item Attributbezeichner werden im "`Lower Camel Case"' formuliert
  \item In der Dokumentation eines Attributs wird immer der erlaubte Wertebereich spezifiziert
  \item Die Dokumentation muss den Spezifikationen der verwendete Sprache entsprechen
- \item Jede Klasse enth\"alt einen der Stati Valid, Experimental oder Depricated in ihrer Dokumentation
+%  \item Jede Klasse enth\"alt einen der Stati Valid, Experimental oder Depricated in ihrer Dokumentation
 \end{itemize}
 Alle Klassen die vom \ac{GDS} verwaltet werden sollen, m\"ussen diesen Grunds\"atzen gen\"ugen um verarbeitet werden zu k\"onnen.
 \subsection{Strukturelle Metadaten}
 Strukturelle Metadaten sind laut der \ac{OPM}-Definition spezielle Metadaten, die den Aufbau einer Programmklasse enthalten. Die Informationen der \ac{SMD} sind programmiersprachenunabhängig und stehen dem Anwendungsprogrammen zur Verfügung.
 
-Die Metadaten werden in einer SQL-Datenbank gespeichert, wo sie wenn benötigt geladen werden können. \cite{Zil14}
+Die Metadaten werden in einer SQL-Datenbank gespeichert, aus der sie, wenn benötigt, geladen werden können. \cite{Zil14}

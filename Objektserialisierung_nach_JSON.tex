@@ -1,49 +1,59 @@
 \section{Objektserialisierung nach JSON}
-Wie in der Aufgabenstellung im Kapitel \ref{Aufgabenstellung} vorgegeben, sollen hier nun die M\"oglichkeiten einer Serialisierung von Java-Objekten in \ac{JSON} untersucht werden.
+Wie in der Aufgabenstellung im Kapitel \ref{Aufgabenstellung} vorgegeben, sollen hier nun die M\"oglichkeiten einer Serialisierung von Java-Objekten, welche OPM-Konform sind, in \ac{JSON} untersucht werden.
 
 \subsection{Was ist Serialisierung}
-Serialisierung ist die Abbildung von Daten auf eine geeignete Darstellungsform und wird oft bei verteilten Softwarel\"osungen wie im Falle von \ac{GDS} verwendet. Der erzeugte Datenstrom kann dann entweder \"uber ein Netzwerk \"ubertragen oder lokal gespeichert werden. Somit liegt das Objekt doppelt vor, zum einen als reales Objekt eines Programms und als serialisiertes Objekt. Eine \"Anderung des Objekts im Programm hat somit keine Auswirkung auf das serialisierte Objekt. \cite{WikiSeri}
+Serialisierung ist die Abbildung von Daten auf eine geeignete Darstellungsform und wird oft bei verteilten Softwarel\"osungen wie im Falle von \ac{GDS} verwendet. Der erzeugte Datenstrom kann dann entweder \"uber ein Netzwerk \"ubertragen oder lokal gespeichert werden. Somit liegt das Objekt doppelt vor, zum einen als reales Objekt eines Programms und als serialisiertes Objekt. Eine \"Anderung des Objekts im Programm hat keine Auswirkung auf das serialisierte Objekt. \cite{WikiSeri}
 
-Im Rahmen dieser Arbeit hei\ss{}t das \ac{OPM} konforme strukturierte Java-Objekte in einen \ac{JSON}-Datenstrom zu wandeln. 
+Im Rahmen dieser Arbeit hei\ss{}t das, \ac{OPM}-konforme, strukturierte Java-Objekte in einen \ac{JSON}-Datenstrom zu wandeln. 
 
 \subsection{M\"oglichkeiten der JSON-Serialisierung in Java}
 Grunds\"atzlich gibt es verschiedene M\"oglichkeiten eine \ac{JSON}-Serialisierung in Java 
 durchzuf\"uhren. Im folgenden werden die im Projektteam diskutierten M\"oglichkeiten genauer vorgestellt. 
 
-\subsection{Eigener Ansatz}
-Eine M\"oglichkeit einen Funktionsf\"ahigen Serialisierer zu erhalten, ist diesen selber zu schreiben. Hierf\"ur m\"usse eine Lesefunktion f\"ur \ac{JSON}-Objekte implementiert werden, was auch als Scanner bezeichnit wird. 
+\subsubsection{Eigener Ansatz}
+Eine M\"oglichkeit, einen funktionsf\"ahigen Serialisierer zu erhalten, ist diesen selbst zu schreiben. Hierf\"ur m\"usste eine Lesefunktion f\"ur \ac{JSON}-Objekte implementiert werden, was auch als Scanner bezeichnit wird. 
 
 Dieser Scanner muss in der Lage sein einen \ac{JSON}-Datenstrom zu lesen und ihn in die einzelnen Bestandteile aufspalten.
 
 Eine weitere Funktion die erf\"ullt werden muss, ist die eines Parsers. Dieser muss die einzelnen vom Scanner erkannten Bestandteile in Javaobjekte umwandeln.
 
 Bei der Implementierung muss des weiteren zum Beispiel auf Rekursion und nicht valide \ac{JSON}-Objekte geachtet werden.
-\subsection{Flexjson}
+
+Es muss also darauf gehend gepr\"uft werden, ob irgendwo eine Rekursion vorliegt und wie diese behandelt werden soll. Dies bezieht sich nicht nur auf die lesende, sondern auch auf die schreibende Richtung.
+
+\subsubsection{Flexjson}
 Flexjson ist eine einfache Bibliothek f\"ur das Serialisieren und Deserialisieren von \ac{JSON}-Objekten in Javaobjekte.
 
 Wenn Attributnamen in \ac{JSON} von dem Deklarationsnamen im Javaobjekt abweichen sollen, m\"ussen Annotationen verwendet werden.
 
-Nachteilig ist das beim Serialisieren immer explizit angegeben werden muss wenn geschachtelte Objekte mit serialisiert werden sollen.
-\subsection{Jackson}
-Jackson ist \"ahnlich wie Flexjson eine Bibliothek f\"ur die Serialisierung von Javaobjekten zu \ac{JSON}-Objekten. Vorteilhaft an Jackson ist das die Bibliothek modular aufgebaut ist. So ben\"otigt man f\"ur einzelne Aufgaben nicht die gesamte Bibliothek.
+Beim Serialisieren muss immer explizit angegeben werden, wenn geschachtelte Objekte mit serialisiert werden sollen und nat\"urlich auch wie tief diese Verschachtelt werden sollen.
 
-Ein weiterer Vorteil ist, dass es \"uber ein Jackson-Modul m\"oglich ist Annotationen von der \ac{JAXB} zu verwenden. Was es erm\"oglicht f\"ur die \ac{JAXB} und Jackson Serialisierung die selben Annotationen zu nutzen. Dies w\"urde die Bearbeitung und die \"Ubersichtlichkeit sehr vereinfachen, da nicht zwei unterschiedlichen Annotationen benutzt werden m\"ussen.
+\subsubsection{Jackson}
+Jackson ist \"ahnlich wie Flexjson eine Bibliothek f\"ur die Serialisierung von Javaobjekten zu \ac{JSON}-Objekten. Vorteilhaft an Jackson ist, dass die Bibliothek modular aufgebaut ist. So wird f\"ur eine einzelne Aufgaben nicht die gesamte Bibliothek ben\"otigt. Um nur spezielle Aufgaben zu erf\"ullen, reicht es aus Teile der Jackson-Bibliothek einzubinden.
+
+Ein weiterer Vorteil ist, dass es \"uber ein Jackson-Modul m\"oglich ist Annotationen von der \ac{JAXB} zu verwenden. Das
+erm\"oglicht es, f\"ur die \ac{JAXB} und Jackson Serialisierung die selben Annotationen zu nutzen. Dies w\"urde die Bearbeitung und die \"Ubersichtlichkeit sehr vereinfachen, da nicht zwei unterschiedlichen Annotationen benutzt werden m\"ussen.
+
 \subsection{Auswertung der M\"oglichkeiten}
 In einer Projektgruppenberatumg wurden alle drei Vorschl\"age ausf\"uhrlich erl\"autert und diskutiert. 
 
-Vorteil des eigenen Ansatzes ist es zum einen, dass man hier v\"ollig frei von fremden Bibliotheken ist und man keine zus\"atzlichen "`technischen Schulden"' aufnehmen muss. Zum anderen ist des sehr Aufw\"andig eigen Klassen f\"ur die Serialisierung und Deserialisierung zu schreiben und dies ist im Rahmen dieser Arbeit leider nicht m\"oglich.
+Vorteil des eigenen Ansatzes ist es zum einen, dass hier keine fremden Bibliotheken benutzt werden m\"ussen ist und keine zus\"atzlichen "`technischen Schulden"' gemacht werden. 
+
+Zum anderen ist es sehr Aufw\"andig eigen Klassen f\"ur die Serialisierung und Deserialisierung zu schreiben, da einfach zu viele Sachen beachtet und ber\"ucksichtig werden m\"ussen. Dies ist im Rahmen dieser Arbeit leider nicht m\"oglich.
 
 Aus diesem Grund schied eigene Ansatz recht fr\"uh aus.
 
-Der zweite Ansatz \"uber die Flexjson Bibliothek ist interessant, und wurde in der Gruppe lange diskutiert. Denn hiermit ist es m\"oglich expliziert anzugeben welche Attribute serialisiert werden sollen, und welche nicht, wie es sp\"ater einmal vorgesehen werden soll.
+Der zweite Ansatz \"uber die Flexjson Bibliothek ist interessant, und wurde in der Gruppe lange diskutiert. Denn hiermit ist es m\"oglich explizit anzugeben welche Attribute serialisiert werden sollen, und welche nicht, wie es vorgesehen ist.
 
 Im letzten Ansatz mit Jackson ist es wie bei \ac{JAXB} m\"oglich den Serialisierer \"uber Annotationen zu steuern. Vorteilhaft ist es vor allem, dass der Jackson und \ac{JAXB} Serialisierer die selben Annotationen managen kann. 
 
+Der gro\ss{}e Vorteil der Steuerung \"uber Annotationen ist jedoch auch ein Nachteil, den diese m\"ussen in allen Klassen angebracht werden in denen an den Attributen etwas zu beachten ist, wie das sie nicht serialisiert werden sollen.
+
 Dies war am Schluss auch das entscheidende Element warum sich f\"ur eine Umsetzung mit Jackson und \ac{JAXB} entschieden wurde. 
 
-Diese Arbeit behandelt jedoch nur die Jackson beziehungsweise \ac{JSON} Verarbeitung. In einer anderen Arbeit die Zeitgleich entstand, ist die Verarbeitung mit \ac{JAXB} und XML zu finden. \cite{Wal14} 
+Diese Arbeit behandelt jedoch nur die Jackson beziehungsweise \ac{JSON} Verarbeitung. In einer anderen Arbeit die zeitgleich entstand, ist die Verarbeitung mit \ac{JAXB} und XML zu finden. \cite{Wal14} 
 
 \subsection{Fragestellungen nach der Besprechung}
 Wie schon erw\"ahnt sollen nicht immer alle Attribute serialisiert werden. Ob, und wies mit Jackson m\"oglich ist, wird im weiteren Verlauf der Arbeit gekl\"art. 
 
-Des weiteren kam die Frage auf, ob es m\"oglich ist Klassenattribute gesondert zu Serialisieren und gegebenen Falls zu untersuchen wie sich dies auf die Serialisierungs- beziehungsweise Deserialisierungsgeschwindigkeit auswirkt.
+Des weiteren kam die Frage auf, ob es m\"oglich ist Klassenattribute gesondert zu Serialisieren und gegebenenfalls zu untersuchen wie sich dies auf die Serialisierungs- beziehungsweise Deserialisierungsgeschwindigkeit auswirkt.

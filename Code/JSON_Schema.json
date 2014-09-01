@@ -1,31 +1,31 @@
 {
 	"type":"object",
 	"proterties":{
-		"String":{
+		"stringValue":{
 			"type":"string"
 		},
-		"Boolean":{
+		"boolValue":{
 			"type":"boolean"
 		},
-		"Nullwert":{
+		"nullValue":{
 			"type":"string"
 		},
-		"Zahl":{
+		"zahlValue":{
 			"type":"integer"
 		},
-		"Fliesskomma":{
+		"fliesskommaValue":{
 			"type":"integer"
 		},
-		"Array":{
+		"arrayValue":{
 			"type":"array",
 			"items":{
 				"type":"string"
 			}
 		},
-		"Object":{
+		"objectValue":{
 			"type":"object",
 			"properties":{
-				"Zahl_2":"integer"
+				"zahl_2Value":"integer"
 			}
 		}
 	}
