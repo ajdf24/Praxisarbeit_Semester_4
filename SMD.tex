@@ -11,7 +11,7 @@ Des weiteren legt der \ac{UDDE} die generierten "`strukturellen Metadaten"' in e
 
 Der SMD-Assistent ist also f\"ur das Umwandeln von Klassen in \ac{SMD}s verantwortlich. Nach dem erstellen der \ac{SMD}s werden diese zur Aufbewahrung vom Assistenten dem \ac{GDS} \"ubergeben, welcher die Ablage der Daten in einer Datenbank verwaltet.
 
-Die \ac{SMD}s werden von der Anwendung an verschiedenen Stellen ben\"otigt. Der \ac{CG} wandelt die \ac{SMD}s wieder in Java-Klassen, welche OPM-Konform erzeugt werden. Bei den erstellten Klassen handelt es sich nat\"urlich nur um einfache Ger\"uste, aber mehr wird f\"ur eine Serialisierung beziehungsweise Deserialisierung nicht ben\"otigt.
+Die \ac{SMD}s werden von der Anwendung an verschiedenen Stellen ben\"otigt. Der \ac{CG} wandelt die \ac{SMD}s wieder in Java-Klassen, welche OPM-Konform erzeugt werden. Eine genaue Spezifikation f\"ur den Klassengenerator ist im Kapitel \ref{CG} zu finden.
 Die generierten Datenstr\"ome k\"onnwn dann ebenfalls vom \ac{GDS} in einer Datenbank gespeichert werden.
 
 Der \ac{IG} erstellt aus den vom SMD-Assistenten gelieferten \ac{SMD}s Schemen f\"ur JSON und XML. Eine Funktion zur Erstellung des JSON-Schemas aus einer Klasse wird in Kapitel \ref{JSON-Schema} beschreiben.
@@ -63,3 +63,17 @@ Hier kommt ein weiterer Assistent zum Einsatz, und zwar der Speicher-Assistent, 
 \subsubsection{Der SMD-Assistent unter Java}
 Unter Java kann die Arbeitsweise des SMD-Assistent deutlich vereinfacht werden, da hier die \ac{SMD}s nur bei explizitem verlangen geliefert werden m\"ussen, denn Java verwendet mit den \textit{.class}-Files eigene Metadaten \"uber die eine Verarbeitung unter Java einfacher Umgesetzt werden kann. 
 Der SMD-Assistent sollte unter Java also in der Lage sein direkt \textit{.class}-Files zu liefern.
+
+\subsection{Der Klassengenerator} \label{CG}
+Der Klassengenerator ist ein Modul des \ac{GDS}, welcher aus den vom SMD-Assistenten gegebenen strukturellen Metadaten wieder Klassen generiert. Es gibt eine abstrakte Klasse \texttt{ClassGenerator} welche abstrakte Methoden zur Verf\"ugung stellt. 
+
+F\"ur jede Programmiersprache, soll nun ein Klassengenerator von der abstrakten Oberklasse abgeleitet werden. Die Programmiersprachen spezifischen Klassengeneratoren sind dann in der Lage, f\"ur ihre Programmiersprache aus den \ac{SMD}s Klassen zu generieren.
+
+Da die Serialisierer wie Jackson und JAXB f\"ur Attribute die nicht \texttt{public} sind Getter- und Setter-Methoden ben\"otigen muss der Klassengenerator diese erzeugen, auch wenn diese Nicht in den \ac{SMD}s auftauchen. Des weiteren muss er diese Methoden auch nach standard implementieren. Dies bedeutet, das in Setter-Methoden die Attribute gesetzt und in Getter-Methoden die Attribute  gelesen werden m\"ussen.
+
+Au\ss{}erdem ben\"otigen die Serialisierer auch Standardkonstruktoren um ein leeres Element zu erstellen, welches im Laufe der Deserialisierung gef\"ullt werden kann.
+
+Um die Serialisierer steuern zu k\"onnen sind gegebenenfalls Annotationen an den Klassen Notwendig, welche ebenfalls vom \texttt{ClassGenerator} angebracht werden m\"ussen.
+
+
+
