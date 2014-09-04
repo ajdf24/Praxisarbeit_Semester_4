@@ -1,0 +1,25 @@
+\section{Zusammenfassung}
+Ziel der vorliegenden Arbeit war die Untersuchung der M\"oglichkeiten einer Serialiserung von Java-Instanzen in JSON-Dokumente und zur\"uck. Nach der Untersuchung verschiedener Ans\"atze wurde in Zusammenarbeit mit einer anderen Arbeit von Herrn Achim Walz f\"ur die Verwendung Jackson entschieden. Herr Walz sollte es Serialisierung nach XML untersuchen und entschied sich in Zusammenarbeit f\"ur JAXB. \cite{Wal14}
+
+Nach einer Untersuchung der M\"oglichkeiten Instanzen in JSON zu speichern, wurde sich auf die Analyse und die Umsetzung mit Jackson spezialisiert. Es wurde untersucht welche Datentypen JSON nativ speichern kann und welche m\"oglichkeiten die einzelnen Module der Jackson Bibliotheke bieten.
+
+Es wurde gezeigt das eine Vollst\"andige Serialisierung von Java-Instanzen m\"oglich ist,woraufhin auch untersucht wurde welche M\"oglichkeiten durch Annotationen m\"oglich sind. Hier wurde auf die Arbeit von Herrn Walz verwiesen, da sich im Projekt f\"ur JAXB-Annotationen entschieden wurde..
+
+Im laufe der Arbeit wurde ersichtlich das eine Spezifikation des \ac{SMD}-Assistenten notwendig wird. Da die Serialisierer auf Daten vom Assistenten zugreift, wurde eine erste Spezifikation erstellt.
+
+\"Ahnlich wie mit dem \ac{SMD}-Assistenten wurde mit dem ClassGenerator verfahren. Da der \ac{CG} die Klassen liefert welche die Serialisierer ben\"otigen wurde auch eine erste Spezifikation von diesem erstellt.
+
+Nach der Implementierung der Serialisierer wurden Testklassen erstellt, welche serialisiert wurden. Hierbei wurden alle Java eigenen "`primitiven Datentypen"' getestet. Aber auch das Verhalten bei rekursiven und Klassen-Attributen wurde untersucht.
+
+Beim serialisieren einer Klasse, welche Massendaten enth\"alt, stellte sich heraus, das sowohl Jackson als auch JAXB Probleme haben diese Klasse zu serialisieren. Dies ergab sich durch einen Array-\"Uberlauf in der Klasse \texttt{StringBuffer} welche von beiden intern Aufgerufen wird.
+
+Bei der Bearbeitung der Aufgabe wurden aber auch einige \"Anderungen im \ac{OPM}-Modell vorgeschlagen, welche zum jetzigen Zeitpunkt zur Diskussion stehen.
+
+Es wurde festgestellt, das eine Serialiserung mit Jackson Vorteile gegen\"uber JAXB bietet und eine entsprechende Empfehlung gegeben. 
+
+\section{Ausblick}
+Im weiteren Verlauf des Projektes, wird nun die Spezifizierung des SMD-Assistent und des ClassGenerators noch einmal \"uberarbeitet und weiter auf dem Gebiet geforscht. 
+
+Der \ac{UDDE}, welcher schon in einer ersten Version existiert, soll nun so erweitert werden das er nicht nur einfache Datentypen verstehen kann, sondern auch Klassen-Attribute sollen sp\"ater durch ihn Verarbeitet werden.
+
+Wenn alle Bereiche und Bestandteile des \ac{GDS} spezifiziert sind, wird eine erste Version nach \ac{OPM}-Regeln implementiert.
