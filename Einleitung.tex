@@ -1,9 +1,9 @@
 \section{Einleitung}
 Die folgende Arbeit befasst sich mit der Serialisierung von Datenobjekten in JSON zur Übertragung von Objektdaten. 
 \subsection{Generisches Managementsystem f\"ur Energiedaten}
-\ac{GDS} ist das generisches Managementsystem f\"ur Energiedaten, es verwendet Objekte um Anwendungsdaten zu verwalten, die einem \ac{OPM} genügen und durch \ac{SMD} beschrieben werden k\"onnen.
+\ac{GDS} ist das generisches Managementsystem f\"ur Energiedaten. Es verwendet Objekte um Anwendungsdaten zu verwalten, die einem \ac{OPM} genügen und durch \ac{SMD} beschrieben werden k\"onnen.
 Das \ac{GDS} wird zur Zeit im \ac{IAI} des \ac{KIT} entwickelt und ist ein System generischer Datenservices welches bei 
-Vertrigstellung vollautomatisch Energiedaten managen soll. 
+Fertigstellung vollautomatisch Energiedaten managen soll. 
 
 Durch den generischen Charakter kann es aber auch Daten aus anderen Bereichen verwalten, wenn diese dem \ac{OPM}-Modell gen\"ugen.
 \subsection{Objektorientiertes Datenmodell}
@@ -14,16 +14,20 @@ Im Folgenden sind die wichtigsten OPM-Regeln dargstellt:
  \item Basisklasse \texttt{OPMObject} von der alle Klassen erben
  \item Es gibt keine Konstanten
  \item Attribute sind grunds\"atzlich \texttt{private}, also von auserhalb der Klasse nicht \"anderbar, und werden gegebenenfalls durch Getter- und Setter-Methoden aufgerufen
- \item Programme bestehen nur aus Objekten, der Aufruf erfolgt ausschlie\ss{}lich \"Uber Methodenaufrufe
+ \item Programme bestehen nur aus Objekten, der Aufruf erfolgt ausschlie\ss{}lich \"uber Methodenaufrufe
  \item Es k\"onnen Standarddatentypen verwendet werden
  \item Methodenbezeichner werden im "`Camel Case"' formuliert
  \item Attributbezeichner werden im "`Lower Camel Case"' formuliert
  \item In der Dokumentation eines Attributs wird immer der erlaubte Wertebereich spezifiziert
- \item Die Dokumentation muss den Spezifikationen der verwendete Sprache entsprechen
+ \item Die Dokumentation der Programmcodes muss den Spezifikationen der verwendete Sprache entsprechen, damit diese auch als Dokumentation vom Compiler erkannt wird
 %  \item Jede Klasse enth\"alt einen der Stati Valid, Experimental oder Depricated in ihrer Dokumentation
 \end{itemize}
 Alle Klassen die vom \ac{GDS} verwaltet werden sollen, m\"ussen diesen Grunds\"atzen gen\"ugen um verarbeitet werden zu k\"onnen.
+
+Des weiteren gibt es, wie eben schon kurz angesprochen, im OPM-Modell eine Oberklasse OPMObject, von der alle Klassen erben sollen. Dieses vorgehen ist zum Beispiel auch in Java umgesetzt, wo jede Klasse von Object erbt.
+
+Vorteil dieses Konzepts ist, das Methoden und Attribute, welche jede Klasse haben soll nur einmal in der Oberklasse aufgef\"uhrt werden m\"ussen.
 \subsection{Strukturelle Metadaten}
-Strukturelle Metadaten sind laut der \ac{OPM}-Definition spezielle Metadaten, die den Aufbau einer Programmklasse enthalten. Die Informationen der \ac{SMD} sind programmiersprachenunabhängig und stehen dem Anwendungsprogrammen zur Verfügung.
+Strukturelle Metadaten sind laut der \ac{OPM}-Definition spezielle Metadaten, die den Aufbau einer Programmklasse enthalten. Die Informationen der \ac{SMD} sind programmiersprachenunabhängig und stehen dem Anwendungsprogrammen zur Verfügung. Siehe Kapitel \ref{SMD-Assistent}.
 
 Die Metadaten werden in einer SQL-Datenbank gespeichert, aus der sie, wenn benötigt, geladen werden können. \cite{Zil14}

@@ -9,7 +9,7 @@ kile_livePreviewStatusUserSpecified=false
 kile_livePreviewTool=LivePreview-PDFLaTeX
 kileprversion=2
 kileversion=2.9.60
-lastDocument=Zusammenfassung.tex
+lastDocument=Jackson.tex
 masterDocument=
 name=Praxisarbeit_Semester_4
 pkg_extIsRegExp=false
@@ -140,20 +140,20 @@ Mode=LaTeX
 
 [item:Abkuerzungen.tex]
 archive=true
-column=19
+column=13
 encoding=ISO-8859-1
 highlight=LaTeX
-line=5
+line=14
 mode=LaTeX
 open=true
 order=5
 
 [item:Aufgabenstellung.tex]
 archive=true
-column=114
+column=268
 encoding=ISO-8859-1
 highlight=LaTeX
-line=7
+line=9
 mode=LaTeX
 open=true
 order=1
@@ -170,70 +170,70 @@ order=10
 
 [item:Einleitung.tex]
 archive=true
-column=68
+column=138
 encoding=ISO-8859-1
 highlight=LaTeX
-line=3
+line=21
 mode=LaTeX
 open=true
 order=0
 
 [item:JSON.tex]
 archive=true
-column=164
+column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=34
+line=36
 mode=LaTeX
 open=true
 order=2
 
 [item:Jackson.tex]
 archive=true
-column=173
+column=169
 encoding=ISO-8859-1
 highlight=LaTeX
-line=138
+line=22
 mode=LaTeX
 open=true
 order=6
 
 [item:Objektserialisierung_nach_JSON.tex]
 archive=true
-column=217
+column=257
 encoding=ISO-8859-1
 highlight=LaTeX
-line=47
+line=46
 mode=LaTeX
 open=true
 order=7
 
 [item:Praxisarbeit_Semester_4.tex]
 archive=true
-column=21
+column=16
 encoding=ISO-8859-1
 highlight=LaTeX
-line=148
+line=87
 mode=LaTeX
 open=true
 order=3
 
 [item:Quellen.bib]
 archive=true
-column=38
+column=25
 encoding=ISO-8859-1
 highlight=BibTeX
-line=9
+line=32
 mode=BibTeX
 open=true
 order=4
 
 [item:SMD.tex]
 archive=true
-column=9
+column=62
 encoding=ISO-8859-1
 highlight=LaTeX
-line=27
+line=0
 mode=LaTeX
 open=true
 order=8
@@ -269,14 +269,14 @@ open=false
 order=-1
 
 [view-settings,view=0,item:Abkuerzungen.tex]
-CursorColumn=19
-CursorLine=5
+CursorColumn=13
+CursorLine=14
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Aufgabenstellung.tex]
-CursorColumn=114
-CursorLine=7
+CursorColumn=268
+CursorLine=9
 JumpList=
 ViMarks=
 
@@ -287,44 +287,44 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Einleitung.tex]
-CursorColumn=68
-CursorLine=3
+CursorColumn=138
+CursorLine=21
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:JSON.tex]
-CursorColumn=164
-CursorLine=34
+CursorColumn=0
+CursorLine=36
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Jackson.tex]
-CursorColumn=173
-CursorLine=138
+CursorColumn=169
+CursorLine=22
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Objektserialisierung_nach_JSON.tex]
-CursorColumn=217
-CursorLine=47
+CursorColumn=257
+CursorLine=46
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Praxisarbeit_Semester_4.tex]
-CursorColumn=21
-CursorLine=148
+CursorColumn=16
+CursorLine=87
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Quellen.bib]
-CursorColumn=38
-CursorLine=9
+CursorColumn=25
+CursorLine=32
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:SMD.tex]
-CursorColumn=9
-CursorLine=27
+CursorColumn=62
+CursorLine=0
 JumpList=
 ViMarks=
 

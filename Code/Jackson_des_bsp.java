@@ -10,7 +10,7 @@ public <T extends OPMObject> T deserialize(String string) {
 		AnnotationIntrospector inspector = new JaxbAnnotationIntrospector(TypeFactory.defaultInstance());
 		mapper.setAnnotationIntrospector(inspector);
 		try {
-			return (T) (mapper.readValue(string, Class.forName("opm_serializer.TestData")));
+			return (T) (mapper.readValue(string, TestData.class)));
 		} catch (IOException | ClassNotFoundException | ClassCastException e) {
 			e.printStackTrace();
 		}
