@@ -1,11 +1,17 @@
 \section{Aufgabenstellung}
 \label{Aufgabenstellung}
-Im \ac{GDS}-System werden Anwendungsdaten mit Hilfe von Objekten verwaltet, welche den Regeln von \ac{OPM} folgen und mittels der \ac{SMD} beschrieben werden können.
+Im \ac{GDS}-System werden Anwendungsdaten mit Hilfe von Klassen-Objekten verwaltet, welche den Regeln von \ac{OPM} folgen und mittels der \ac{SMD} genau beschrieben werden können.
 
-Für den Transfer von solchen Anwendungsdaten sind Schnittstellen für die automatische Serialisierung der Daten vorgesehen, welche im Rahmen dieser und einer weiteren Arbeit entwickelt werden sollen.  \cite{Wal14} 
+Für den Transfer von solchen Anwendungsdaten sind Schnittstellen für die automatische Serialisierung der solcher Daten vorgesehen, welche im Rahmen dieser und einer weiteren Arbeit entwickelt werden sollen.  \cite{Wal14} 
 
-Ziel der Arbeit ist es, Spannungszeitreihen und OPM-Objekte mittels der Metadaten in ein JSON-Format zu serialisieren und diese zu \"ubertragen.  Die Empfängerseite muss letztendlich in der Lage sein, aus den übertragenen Daten wieder Objekte zu erstellen.
-Da es sich im Projekt bei allen Klassen um OPM-Objekte handelt, muss es prinzipiell m\"oglich sein jedes Objekt, im Projekt, zu serialisieren.
+Ziel der Arbeit ist es, Spannungszeitreihen und OPM-Objekte mittels der Metadaten in ein \ac{JSON}-Format zu serialisieren und diese zu \"ubertragen.  Die Empfängerseite muss letztendlich in der Lage sein, aus den übertragenen \ac{JSON}-Daten wieder Objekte zu erstellen, welche im Programm weiter verarbeitet werden können.
+Da es sich im Projekt bei allen Klassen um OPM-Objekte handelt, muss es prinzipiell m\"oglich sein jedes Klassen-Objekt, im Projekt, zu serialisieren.
 
-Abschlie\ss{}end soll ein Vergleich zeigen welche der  Serialisierungsarten (JSON oder XML)  besser geeignet ist. Hierfür wird die Arbeit "`Serialisierung von Datenobjekten in XML zur Übertragung von Objekten aus Energieanwendungen"' von Herrn Achim Walz herangezogen. \cite{Wal14}
+Es soll analysiert werden, welche Möglichkeiten bestehen um Java-Klassen-Objekte zu serialisieren, beziehungsweise zu Deserialisieren. Hierfür soll ein Vergleich verschiedener Techniken erfolgen, welche zu bewerten sind. 
+
+Die beste Möglichkeit soll im Anschluss, der Überprüfung, implementiert und genauer untersucht werden. Hierbei ist ein besonderes Augenmerk auf die Geschwingigkeit des Serialisierungprozesses zu legen. Aber auch grundlegende Aspeke wie Einfachheit der Implementierung, zusammenspiel mit anderen Serialisieren und die Anwendbarkeit an realitätsnahen Daten soll überprüft werden.
+
+Es soll des weiteren geprüft werden, ob alle "`Standard-Datentypen"' serialisiert werden können und wie der Umgang mit Klassen-Attributen, Rekursion und Attributen die nicht serialisiert werden sollen beschaffen ist.
+
+Abschlie\ss{}end soll ein Vergleich zeigen welche Serialisierungsart (JSON oder XML), für das Projekt, besser geeignet ist. Hierfür wird die Arbeit "`Serialisierung von Datenobjekten in XML zur Übertragung von Objekten aus Energieanwendungen"' von Herrn Achim Walz herangezogen. \cite{Wal14}
 
