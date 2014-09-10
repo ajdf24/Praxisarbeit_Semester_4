@@ -1,58 +1,58 @@
 \section{Test des JSON Serialisierers}
-Im Verlauf dieses Kapitels wird die Arbeitszeit und das Verhalten der Jackson Bibliotheken untersucht und eine Auswertung dieser Tests vorgenommen.
+Im Verlauf dieses Kapitels wird die ben\"otigte Arbeitszeit zum Serialisieren und Deserialisieren, sowie das Verhalten der Jackson Bibliotheken untersucht und eine Auswertung dieser Tests vorgenommen.
 
 \subsection{Testaufbau}
-Im Test wird der Quellcode wie im Verlauf der Arbeit beschrieben eingesetzt um das Verhalten der JSON Bilbliotheken genauer zu beurteilen.
+Im Test wird der Quellcode wie im Verlauf der Arbeit beschrieben eingesetzt um das Verhalten der JSON-Bilbliotheken genauer zu beurteilen.
 
-In den folgenden Unterkapiteln zum Testaufbau ist immer nur von Serialisierung die rede, was aus \"Ubersichtlichkeitsgr\"unden getan wurde. Gemeit ist jedoch nicht nur die Serialisierung sondern auch die Deserialisierung.
+In den folgenden Unterkapiteln zum Testaufbau ist immer nur von Serialisierung die Rede, was aus \"Ubersichtlichkeitsgr\"unden getan wurde. Gemeit ist jedoch nicht nur die Serialisierung sondern auch die Deserialisierung.
 
-\subsection{Testaufbau der Software}
+\subsection{Testaufbau Software}
 Der Test wird mit speziell f\"ur Testzwecke geschriebene Klassen durchgef\"uhrt, wobei es sich um f\"unf Testklassen handelt.
 
-Die erste Klasse enth\"alt genau einen \texttt{short}-Wert als Attribut zur Serialisierung. Mit Hilfe dieser Klasse soll unter Beachtung der anderen Tests herausgefunden werden wie lange der Anlauf und das Ausf\"uhren einer Serialisierung ben\"otigt. Diese Aussage ist m\"oglich, da abgesehen von zwei Byte keine Daten weiter Serialisiert werden und somit sollte die Bearbeitung des Attributs keine Auswirkung haben.
+Die erste Klasse enth\"alt genau einen \texttt{short}-Wert als Attribut zur Serialisierung. Mit Hilfe dieser Klasse soll unter Beachtung der anderen Tests herausgefunden werden wie lange der Anlauf und das Ausf\"uhren einer Serialisierung ben\"otigt. Diese Aussage ist m\"oglich, da abgesehen von zwei Byte keine weiteren Daten der Klasse Serialisiert werden und somit sollte die Bearbeitung eines Attributs keine Auswirkung haben.
 
-Eine Klasse, welche genau ein Gibibyte ($2^{30}$ = 1 073 741 824 Byte)an Daten beinhaltet soll etwas \"uber die Zeit f\"ur die Serialisierung von einem Element aussagen, da hier die Zeit f\"ur das Aunlaufen der Serialisierer vernachtl\"assigt werden kann.
+Eine Klasse, welche genau ein Gibibyte ($2^{30}$ = 1 073 741 824 Byte) an Daten beinhaltet, soll etwas \"uber die Zeit f\"ur die Serialisierung von einem Element aussagen, da hier die Zeit f\"ur das Anlaufen des Serialisieres vernachl\"assigt werden kann.
 Um die Datenmenge zu erreichen wird eine Klasse mit 536 870 912 \texttt{short}-Werten in einem Array erzeugt, denn jeder \texttt{short}-Wert ist 2 Byte gro\ss{}, wodurch sich die genaue Gr\"o\ss{}e von einem Gibibyte ergibt.
 
-Die dritte Testklasse ent\"alt von jedem m\"oglichen "`Primitiven Datentypen"' genau ein Attribut mit einem Wert. Sie dient Haupts\"achlich als Vergleichspunkt zu den beiden noch fehlenden Klassen, aber auch um zu beweisen das jeder Datentyp Serialisiert werden kann.
+Die dritte Testklasse ent\"alt von jedem m\"oglichen "`Standard-Datentyp"' genau ein Attribut mit einem Wert. Sie dient Haupts\"achlich als Vergleichspunkt zu den beiden noch fehlenden Klassen, aber auch um zu beweisen das jeder Datentyp serialisiert werden kann.
 
-Eine weitere Klasse ist genau wie die dritte beschriebene Vergleichsklasse aufgebaut, jedoch mit dem Unterschied das diese eine weiteres Attribut besitzt. Bei dem neuen Attribut, handelt es sich um ein Klassenattribut, welches der dritten Klasse entspricht.
-Gepr\"uft soll nun werden ob die Serialisierung \"ahnlich lang wie der dritte Klasse dauert. Sollte das der Fall sein beinhalten die eingesetzten Serialisierer keinen Cache, bzw. arbeiten nicht vorausschauend.
+Eine weitere Klasse ist genau wie die dritte beschriebene Vergleichsklasse aufgebaut, jedoch mit dem Unterschied, dass diese ein weiteres Attribut besitzt. Bei dem neuen Attribut, handelt es sich um ein Klassenattribut, welches der dritten beschrieben Klasse entspricht.
+Gepr\"uft werden soll nun, ob die Serialisierung \"ahnlich lange wie der dritte Klasse dauert. Sollte das der Fall sein beinhalten der eingesetzte Serialisierer keinen Cache, bzw. arbeiten nicht vorausschauend.
 
 Bei der letzten zu testenden Klasse handelt es sich um eine rekursive Version der dritten Klasse, wobei zwei Rekursionsstufen gemacht werden. Hier soll gepr\"uft werden wie die Serialisierung mit Rekursion umgeht.
 
 \newpage
-\subsection{Testaufbau der Hardware}
+\subsection{Testaufbau Hardware}
 Die Tests wurden auf einem Arbeitsplatzrechner mit Kubuntu 12.04.2 Linux 3.2.0.58-generic x86-64 durchgef\"uhrt.
 
 Die Hardwaredaten des Rechners waren folgende:
 \begin{itemize}
- \item CPU: 2x Intel Xeon 5148 mit 2,33GHz
- \item RAM: 8GB DDR-2 667MHz (Zugriffszeit 1,5ns)
+ \item CPU: 2x Intel Xeon 5148 mit 2,33 GHz
+ \item RAM: 8GB DDR-2 667 MHz (Zugriffszeit 1,5 ns)
  \item Chipsatz: Intel 5000 Series Chipset
- \item Festplatte: Seagate ST31000528AS (1TB) davon 16GB Swap
+ \item Festplatte: Seagate ST31000528AS (1 TB) davon 16 GB Swap
 \end{itemize}
-Zur Festplatte sollte noch gesagt sein, das sich das Betriebssystem, Swap und Datenpartition jeweils auf getrennten Partitionen befinden, jedoch physisch auf einer Festplatte.
+Zur Festplatte sollte noch gesagt sein, das sich das Betriebssystem, Swap und Datenpartition jeweils auf getrennten Partitionen befinden, jedoch physisch auf einer Festplatte sind.
 
 \subsection{Testdurchf\"uhrung}
-Die Testdurchf\"uhrung wurde zuerst Zusammenh\"angend ausgef\"uhrt, jedoch wurden sehr fr\"uh Effekte verschiedener Caching-Mechanismen festgestellt, was eine genaue Messung der Tests nicht m\"oglich macht. 
+Die Testdurchf\"uhrung wurde zuerst Zusammenh\"angend ausgef\"uhrt, das hei\ss{}t alle Test wurden automatisiert vom Programm ausgef\"uhrt. Jedoch wurden sehr fr\"uh Effekte verschiedener Caching-Mechanismen festgestellt, was eine genaue Messung der Tests auf diese Art nicht m\"oglich macht. 
 
-Es wurde somit entschieden jeden Test einzeln durchzuf\"uhen und ihn jeweils drei mal zu wiederholen, wenn keine extremen Schwankungen auftreten. Sollte des der Fall sein muss ein Test \"ofters wiederholt werden.
+Es wurde somit entschieden jeden Test einzeln durchzuf\"uhen und ihn jeweils drei mal zu wiederholen, wenn keine extremen Schwankungen auftreten. Sollte das der Fall sein muss ein Test \"ofters wiederholt werden.
 
 \subsubsection{Auff\"alligkeiten bei Testbeginn}
-Die gr\"o\ss{}e Klasse mit einem Gibibyte Daten bereitetete Probleme. 
-Jackson ist nicht in der Lage so viele Elemente in einer Instanz zu Serialisierung.
+Die gr\"o\ss{}te Klasse mit einem Gibibyte Daten bereitetete Probleme. 
+Jackson ist nicht in der Lage so viele Elemente in einer Instanz zu serialisieren.
 
-Dies liegt daran, dass bei einer solch gro\ss{}en Datenmenge extrem Gro\ss{}e Strings entstehen welche die \texttt{StringBuffer}-Klasse nicht verarbeiten kann, da diese auf Arrays bassiert, welche die Gr\"o\ss{}e beschr\"anken.
+Dies liegt daran, dass bei einer solch gro\ss{}en Datenmenge extrem gro\ss{}e Strings entstehen welche die \texttt{StringBuffer}-Klasse, welche intern in Jackson verwendet wird, nicht verarbeiten kann, da diese auf Arrays bassiert, welche die Gr\"o\ss{}e beschr\"anken.
 
-Da dieser Effekt auch bei f\"unfhundert Mebibyte auftrat, wurde entschieden die gro\ss{}e Klasse auf zweihundertf\"unfzig Mebibyte zu beschr\"anken. Daraus resultiert das sich nur noch 134217728 \texttt{short}-Werte im Array befinden.
+Da dieser Effekt auch bei f\"unfhundert Mebibyte auftrat, wurde entschieden die gro\ss{}e Klasse auf zweihundertf\"unfzig Mebibyte zu beschr\"anken. Daraus resultiert das sich nur noch 134 217 728 \texttt{short}-Werte im Array befinden. Was eine Datengr\"o\ss{}e von 256 Mebibyte darstellt.
 
 \subsection{Testergebnisse}
-Die folgenden Testergebnisse wurde wie oben beschrieben ermittelt.
+Die folgenden Testergebnisse wurde wie oben beschrieben ermittelt, wobei die Einzeit in Millisekunden des Vorgangs von der Startzeit in Milisekunden angezogen wurde.
 
-Das serialisieren einer Klasse mit einem \texttt{short}-Wert dauerte bei drei Durchg\"angen 338, 335 und 337 Millisekunden. Die Deserialisierung betrug im Gegensatz dazu wesentlich weniger Zeit, n\"amlich 40, 40 und 41 Millisekunden. 
+Das Serialisieren einer Klasse mit einem \texttt{short}-Wert dauerte bei drei Durchg\"angen 338, 335 und 337 Millisekunden. Die Deserialisierung betrug im Gegensatz dazu wesentlich weniger Zeit, n\"amlich 40, 40 und 41 Millisekunden. 
 
-Die Klasse mit alle m\"oglichen Datentypen ben\"otigte f\"ur die Serialisierung  355, 344 und 346 Millisekunden. Das Deserialisieren ben\"otigte kaum mehr Zeit als bei nur einem Wert und zwar 46, 46 und 50 Milisekunden.
+Die Klasse mit allen m\"oglichen Datentypen ben\"otigte f\"ur die Serialisierung  355, 344 und 346 Millisekunden. Das Deserialisieren ben\"otigte kaum mehr Zeit als bei nur einem Wert und zwar 46, 46 und 50 Milisekunden.
 
 Eine Innere Klasse in einer Klasse ben\"otigte f\"ur das Serialisieren 355, 341 und 342 Millisekunden. Die Deserialisierung dauerte 49, 50 und 49 Millisekunden
 
@@ -61,22 +61,24 @@ Der selbe Dateninhalt, jedoch rekursiv aufgerufen brauchte zum Serialisieren 343
 Das Serialisieren der gro\ss{}en Klasse ben\"otigte 10632, 10751 und 10521 Millisekunden. Zum Deserialisieren wurde eine Zeit von 17012, 16836 und 17127 Millisekunden ben\"otigt.
 
 \subsection{Auswertung der Testergebnisse}
-\"Uber JSON kann also Ausgesagt werden, dass das Starten des Serialisierungsprozesses in etwa 336 Millisekunden dauert, da das Serialisieren einer Klasse mit einem Element im Mittel diese Zeit ben\"otigt und somit die Serialisierung dieses Attributs vernachl\"assigt werden kann.
+\"Uber JSON kann also ausgesagt werden, dass das Starten des Serialisierungsprozesses in etwa 336 Millisekunden dauert, da das Serialisieren einer Klasse mit einem Attribut im Mittel diese Zeit ben\"otigt und somit die Serialisierung dieses Attributs vernachl\"assigt werden kann, da es quasi keine Zeit in Anspruch nimmt.
 
-Dies ist nur m\"oglich, da auch eine Klasse mit mehreren Elementen (Klasse mit jeweils ein Attribut von jedem Datentyp) mit 348,3 Millisekunden eine \"ahnlich Zeit ben\"otigt.
+Dies ist nur m\"oglich, da auch eine Klasse mit mehreren Elementen (Klasse mit jeweils einem Attribut von jedem Datentyp) mit 348,3 Millisekunden eine \"ahnlich Zeit ben\"otigt.
 
-Aus der Serialisierung der gro\ss{}en Klasse l\"asst sich sehr gut entnehmen das die Serialisierung eines einzelnen Elements quasi keine Zeit in Anspruch nimmt, den die Zeit f\"ur ein Element liegt bei $7,67111^{-5}$ Millisekunden. 
+Aus der Serialisierung der gro\ss{}en Klasse l\"asst sich sehr gut entnehmen das die Serialisierung eines einzelnen Elements quasi keine Zeit in Anspruch nimmt, den die Zeit f\"ur ein Element liegt bei $7,67111*10^{-5}$ Millisekunden. 
 
-Hier kommt auch gut zur Geltung wie stark Java optimieren kann, denn bei kleinen Klasse wird f\"ur jedes Element im Schnitt eine Millisekunden ben\"otigt. Was im krassen Gegensatz zu 0,000071 Millisekunden steht. Diese extreme Beschleunigung wird zum einen durch Caching-Mechanismen, aber auch vom Jit-Compiler und der darausfolgenden Parallelisierung hervorgerufen. 
+Hier kommt auch gut zur Geltung wie stark Java optimieren kann, denn bei kleinen Klasse wird f\"ur jedes Element im Schnitt eine Millisekunden ben\"otigt. Was im krassen Gegensatz zu 0,000071 Millisekunden steht. Diese extreme Beschleunigung wird zum einen durch Caching-Mechanismen, aber auch vom JIT-Compiler und der daraus folgenden Parallelisierung hervorgerufen. 
 
-Welche Mechanismen wo genau aunsetzten und wie sie im speziellen Angewendet werden, wurde im Rahmen dieser Arbeit nicht untersucht
+Welche Mechanismen wo genau ansetzten und wie sie im speziellen angewendet werden, wurde im Rahmen dieser Arbeit nicht untersucht.
 
-Auch das Serialisieren und Deserialisieren von Inneren Klassen und Rekursion wird anscheinend sehr gut Optimiert, da sich hier im direkten Vergleich zu einfachen Klassen keine wesentlichen Zeitlichen Unterschiede ergeben.
+Auch das Serialisieren und Deserialisieren von Inneren Klassen und Rekursion wird anscheinend sehr gut optimiert, da sich hier im direkten Vergleich zu einfachen Klassen keine wesentlichen zeitlichen Unterschiede ergeben.
+
+Bei langen Strings dauert das Deserialisieren pl\"otzlich l\"anger als das Serialisieren, was daher r\"uhrt, dass bei der Klassennamensuche der komplette String durchlaufen werden muss.
 
 \subsection{Zusammenfassung der Testergebnisse}
-Obwohl bei der Deserialisierung der ankommende String erst auf die Zugeh\"orige Klasse gepr\"uft werden muss ist des Deserialisierung deutlich schneller erledigt als eine Serialisierung. Dies l\"asst darauf schlie\ss{}en, dass es einfacher und schneller geht Objekte zu bauen als diese zu speichern.
+Obwohl bei der Deserialisierung der ankommende String erst auf die zugeh\"orige Klasse gepr\"uft werden muss, ist die Deserialisierung deutlich schneller erledigt als eine Serialisierung. Dies l\"asst darauf schlie\ss{}en, dass es einfacher und schneller geht Objekte zu bauen als diese zu speichern.
 
-Die Serialisierung mit Jackson ist zum einen schnell, aber auch sehr Arbeitsspeicher intensiv. Beim Testen konnte beobachtet werden wie beim Serialisieren der allokierte Arbeitsspeicher sprunghaft ansteigt. Es zeigte sich, das mindestens vier mal so viel Ram ben\"otigt wird, wie die Datei eigentlich gro\ss{} ist. 
+Die Serialisierung mit Jackson ist zum einen schnell, aber auch sehr Arbeitsspeicher intensiv. Beim Testen konnte beobachtet werden wie beim Serialisieren der allokierte Arbeitsspeicher sprunghaft ansteigt. Es zeigte sich, dass mindestens vier mal so viel RAM ben\"otigt wird, wie die zu serialisierende Datei gro\ss{} ist. 
 
 
 
