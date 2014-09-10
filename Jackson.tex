@@ -1,39 +1,49 @@
 \section{Jackson und das Jackson Projekt}\label{Jackson}
-Das Jackson-Projekt entwickelt eine freie und modulare Bibliothek f\"ur die Serialisierung und Deserialisierung von Java-Instanzen in \ac{JSON}-Dokumente und zur\"uck. Jackson wird unter der Contributor License Agreement (CLA) vermarktet. Die zur Zeit aktuelle Version ist 2.4.1, welche auch bei der Bearbeitung des Projektes eingesetzt wird.
+Das Jackson-Projekt entwickelt eine freie und modulare Bibliothek, f\"ur die Serialisierung und Deserialisierung von Java-Instanzen in \ac{JSON}-Dokumente und zur\"uck. Jackson wird unter der Contributor License Agreement (CLA) vermarktet. Die zur Zeit aktuelle Version ist 2.4.1, welche auch bei der Bearbeitung des Projektes eingesetzt wird.
 
 \subsection{Jackson-Module}
-Die Jackson-Bibliothek besteht aus drei Hauptmodulen, welche wie folgt bezeichnet sind:
+Die Jackson-Bibliothek besteht aus verschiedenen Modulen, welche wie folgt bezeichnet und die folgenden Aufgabenbereiche haben:
 \begin{itemize}
  \item "`jackson-core"' welches die JSON spezifische Implementierung sowie eine low-level streaming API enth\"alt 
- \item "`jackson-databind"' welches f\"ur das \textit{databind} verantwortlich ist.
- \item "`jackson-module-jsonSchema"' welches ein JSON-Schema f\"ur eine Klasse erstellt
- \item "`jackson-annotations"' welches die Jackson spezifischen Annotationen enth\"alt.
+ \item "`jackson-databind"' welches f\"ur das \textit{databind} verantwortlich ist
+ \item "`jackson-annotations"' welches die Jackson spezifischen Annotationen enth\"alt
  \item "`jackson-module-jaxb-annotations"' ist f\"ur die Verarbeitung von JAXB-Annotationen verantwortlich
+ \item "`jackson-module-jsonSchema"' welches ein JSON-Schema f\"ur eine Klasse erstellt
 \end{itemize}
-Der Core enth\"alt die low-level-streaming API welche die Kommunikation zwischen den einzelnen Modulen \"ubernimmt. Des weiteren enth\"alt dieses Modul viele Grundklassen die auch in anderen Modulen ben\"otigt werden.
 
-Die Jackson Annotationen enthalten Informationen die f\"ur das Serialisieren beziehungsweise Deserialisieren verantwortlich sind.
-Jackson kann aber auch Annotationen von anderen Serialisierern erkennen und darauf reagieren.
-
-Eine Mischung von Annotationen von verschiedenen Serialisierern ist Grunds\"atzlich m\"oglich, aber nicht empfehlenswert da hier die \"Ubersichtlichkeit und die Verst\"andlichkeit des Codes leidet.
+Der Core enth\"alt die low-level-streaming API, welche die Kommunikation zwischen den einzelnen Modulen \"ubernimmt. Des weiteren enth\"alt dieses Modul viele Grundklassen die auch in anderen Modulen ben\"otigt werden.
+Durch die grundlegenden Klassen und die Aufgabe als Kommunikationsvermittler wird das Modul \texttt{jackson-Core} immer benötigt, auch wenn dieses keine Aufgabe der Serialisierung im eigentlichen Sinn übernimmt.
 
 Unter Databind wird eine Methode verstanden, welche \"uber ein Userinterface gesteuert werden kann.
 Dieses Modul ist in der Lage Daten aus einem Datenstrom wie zum Beispiel einem JSON-File zu lesen oder zu schreiben.
 
-Mit diesen drei Modulen ist Jackson voll einsetzbar und kann Java-Instanzen zu einem JSON-Datenstrom umwandeln. Der JSON-Datenstrom wiederum kann gespeichert oder an andere Programme gesendet werden.
+Das Databind-Modul enthält somit den für \ac{JSON} notwendigen Scanner und Parser, welche die Umwandlung von Java-Klasse-Objekten in \ac{JSON}-Objeke und zurück übernehmen.
 
-Um jedoch einheitliche Annotationen f\"ur Jackson und JAXB zu haben, wird ein weiteres Jackson-Modul ben\"otigt, welches in der Lage ist die JAXB-Annotationen zu verarbeiten.
+Die Jackson Annotations enthalten Informationen, die f\"ur das Serialisieren beziehungsweise Deserialisieren verantwortlich sind. Sie sind mit den AnnotationInspectoren in diesem Modul zusammengefasst.
+Jackson kann aber auch Annotations von anderen Serialisierern erkennen und darauf reagieren.
+Hierfür wird ein weiteres Jackson-Modul ben\"otigt, welches in der Lage ist die JAXB-Annotationen zu verarbeiten (\texttt{jackson-module-jaxb-annotations}).
 
-Auch die Erstellung eines JSON-Schemas aus der Klasse ist mit Hilfe des Moduls "`jackson-module-jsonSchema"' m\"oglich. Wie eine Schemaerzeugung genau funktioniert wird im Kapitel \ref{JSON-Schema} genauer erkl\"art. \cite{Jackson}
+Annotations sind unter Jackson nicht zwingend für eine grundlegende Arbeitsweise des Serialisierers notwendig. Die Annotationen werden jedoch für erweiterte Aufgaben wie zum Beispiel das einschrenken des Wertebereichs eines Attributs benötigt.
+
+Mit den drei Hauptmodulen \texttt{jackson-Core}, \texttt{jackson-databind} und \texttt{jackson-annotations} ist die  Jackson-Bibliothek voll einsetzbar und kann Java-Instanzen zu einem JSON-Datenstrom umwandeln. Der JSON-Datenstrom wiederum kann gespeichert oder an andere Programme gesendet werden.
+
+Um jedoch einheitliche Annotations f\"ur Jackson und JAXB zu haben, kommt das eben schon einmal angesprochene Modul \texttt{jackson-module-jaxb-annotations} zum Einsatz. Mit dessen Hilfe Jackson in der Lage ist auch Annotations von JAXB zu verarbeiten.
+
+Eine Mischung von Annotations verschiedener Serialisierer ist Grunds\"atzlich m\"oglich, aber nicht empfehlenswert da hier die \"Ubersichtlichkeit und die Verst\"andlichkeit des Codes leidet.
+Aus diesem Grund wird hierauf in der Arbeit nicht weiter eingegangen.
+
+Auch die Erstellung eines JSON-Schemas aus einer Java-Klasse ist mit Hilfe des Moduls "`jackson-module-jsonSchema"' m\"oglich. Mit Hilfe von den Annotations kann dieses Schmea erweitert werden. Die Erweiterungen beziehen sich Hauptsächlich auf Werteberiche oder veränderte Namensgebung. Mit Annotations, welche für die Namensgebung verantwortlich sind, ist es möglich im \ac{JSON}-Dokument andere Namen zu verwenden als die Attributnamen.
+Wie eine Schemaerzeugung genau funktioniert wird im Kapitel \ref{JSON-Schema} genauer erkl\"art. \cite{Jackson}
 
 \subsection{Serialisierung mit Jackson}\label{Serialisierung}
-Der im folgenden beschriebene Sachverhalt erl\"autert das Quellcode-Listing unten.
+Der im folgenden beschriebene Sachverhalt erl\"autert das Quellcode-Listing auf der nächsten Seite.
 
 Um eine Serialisierung mit Jackson umzusetzen wird zuerst eine Instanz der Klasse \\\texttt{ObjectMapper} ben\"otigt, welche den Databinder darstellt, welcher wie schon dargestellt den Datenstrom verarbeitet. Dieser \texttt{mapper} ist somit f\"ur die Convertierung von Java-Instanzen zu JSON-Dokumenten verantwortlich. Das zu serialisierende Objekt ist im Beispiel \texttt{opmObject}, welches der Methode \texttt{serialize} \"ubergeben wird.
 
 Jedoch wird nicht nur der \texttt{mapper} ben\"otigt, sondern auch ein \texttt{AnnotationInspector} der jedoch abstrakt ist. Der \texttt{inspector} wird deshalb als Instanz von \texttt{JaxbAnnotationInspector} erstellt, was durch eine Implementierung der abstrakten Klasse m\"oglich ist. 
+Weiterführende Überlegungen zum AnnotationInspector sind im Kapitel \ref{SMDAnnotationInsector} näher erläutert.
 
-Dem \texttt{inspector} wird eine \texttt{TypeFactory} mit "`Default-Einstellungen"' \"ubergeben . Dies bedeutet es wird auf die Original JAXB-Annotationen geparst, ohne auf Sonderf\"alle zu achten. Andere Annotation werden nicht ber\"ucksichtigt. Der \texttt{inspector} wird schlie\ss{}lich, nach der Erstellung, dem \texttt{mapper} \"ubergeben, damit dieser auf die entsprechnden Annotationen reagieren kann.
+Dem \texttt{inspector} wird eine \texttt{TypeFactory} mit "`Default-Einstellungen"' \"ubergeben . Dies bedeutet es wird auf die Original JAXB-Annotations geparst, ohne auf Sonderf\"alle zu achten. Andere Annotations werden nicht ber\"ucksichtigt. Der \texttt{inspector} wird schlie\ss{}lich, nach der Erstellung, dem \texttt{mapper} \"ubergeben, damit dieser auf die entsprechnden Annotations reagieren kann.
 
 Um eine \textit{Minimal Exception Safety} zu garantieren wird nun eine \texttt{null}-Abfrage des zu serialisierenden Elements (\texttt{opmObject}) gemacht. Mit dieser Stufe der Sicherheit soll nicht verhindert werden, dass eine Exception passiert. Es wird lediglich garantiert, dass die Methode ohne abzust\"urzen durchlaufen werden kann. \cite{ExceptionSafety}
 
@@ -41,20 +51,35 @@ Ist die zu serialisierende Instanz \texttt{null}, so wird eine \texttt{Illegalag
 
 Eine \texttt{JsonProcessingException} wird generiert, wenn Probleme beim parsen, beziehungsweise beim generieren des JSON-Kontent auftreten die keine puren I/O-Probleme sind. Die Exception erbt jedoch von \texttt{IOExecption}. Bei der \texttt{JsonProcessingException} handelt es sich um eine "`checked"' Exception welche irgendwo im Programmablauf abgefangen werden muss.
 
-\lstinputlisting{Code/Jackson_bsp.java}
+Über den Methodenaufruf \texttt{writeValueAsString} wird also der Serialisierungsprozess mit der Jackson-Bibliothek in gang gesetzt.
+
+Aus Gründen der Verständlichkeit, wurde die \texttt{null}-Abfrage nicht am Methodenanfang gemacht, um bei einer Fehleingabe die Methode frühstmöglich zu verlassen ohne vorher Objekte zu erstellen.
 \newpage
+\lstinputlisting{Code/Jackson_bsp.java}
+
+\subsubsection{AnnotationInspector}\label{SMDAnnotationInsector}
+Da wie eben schon einmal erklärt, der \texttt{AnnotationInspector} als abstrakte Klasse implementiert wurde, muss diese mit einer implementierten Instanz instanziiert werden. Dies kann wie im Kapitel \ref{Serialisierung} mit dem \texttt{JaxbAnnotationInspector} oder einen anderen \texttt{AnnotationInspector} geschehen.
+
+Durch die Abstraktion der Klasse \texttt{AnnotationInspector} ist es möglich hier weitere Inspektoren zu Implementieren. 
+
+So wäre es zum Beispiel möglich, einen \texttt{SMDAnnotationInsector} selber zu entwickeln, welcher nicht auf Annotations in einer Klasse achtet, sondern auf die im Projekt vorhandenen \ac{SMD} zurückgreift.
+
+Mit dieser Lösung müssen keine Annotations an die eigentliche Klasse angebracht werden. Diese Informationen könnte durch den \texttt{SMDAnnotationInsector} direkt übern den \ac{SMD}-Assistenten aud der \ac{SMD}-Datenbank geladen werden. Eine genauere Beschreibung zum \ac{SMD}-Assistenten ist im Kapitel \ref{SMD-Assistent} zu finden.
+
+% \newpage
 \subsection{Deserialisierung mit Jackson}
-Der im folgenden beschriebene Zusammenhang ist noch einmal im Quellcode-Listing unten zu finden.
+Der im folgenden beschriebene Zusammenhang ist noch einmal im Quellcode-Listing auf der nächsten Seite zu finden.
 
-F\"ur die Deserialisierung mit Hilfe von Jackson wird wie bei der Serialisierung ebenfalls ein Databinder, also ein Objekt der Klasse \texttt{ObjectMapper} und ein \texttt{AnnotationInspector} ben\"otigt, welche wie im Kapitel \ref{Serialisierung} erstellt werden. 
+F\"ur die Deserialisierung mit Hilfe von Jackson wird wie bei der Serialisierung ebenfalls ein Databinder, also ein Objekt der Klasse \texttt{ObjectMapper} und ein \texttt{AnnotationInspector} ben\"otigt welche, wie im Kapitel \ref{Serialisierung} schon beschrieben, erstellt werden. 
 
-Bevor dies jedoch passiert, wird gepr\"uft ob der eingegebene String weder \texttt{null} noch \texttt{empty} ist, womit wieder die \textit{Minimal Exception Safety} garantiert werden kann. Sollte einer F\"alle auftreten, so wird eine \texttt{IllegalagumentException} zur\"uckgeliefert.
+Bevor dies jedoch passiert, wird gepr\"uft ob der eingegebene String weder \texttt{null} noch \texttt{empty} ist, womit wieder die \textit{Minimal Exception Safety} garantiert werden kann. Sollte einer dieser F\"alle auftreten, so wird eine \texttt{IllegalagumentException} zur\"uckgeliefert und die Methode ordnungsgemäß.
 
-Wenn der String, wie eigentlich zu erwarten ist, einen Inhalt habt, wird die Methode \texttt{readValue} vom \texttt{mapper} mit dem \"ubergebenden String und der Information um welche Klassen-Instanz es sich beim String handelt \"ubergeben. Der zur\"uckgegebene Typ, der Methode \texttt{readValue}, entspricht dem Typ der im zweiten Argument \"ubergebenen Instanz.
+Wenn der String, wie eigentlich zu erwarten ist, einen Inhalt hat, wird die Methode \texttt{readValue} vom \texttt{mapper} mit dem \"ubergebenden String und der Information um welche Klassen-Instanz es sich beim String handelt \"ubergeben. Der zur\"uckgegebene Typ, der Methode \texttt{readValue}, entspricht dem Typ der im zweiten Argument \"ubergebenen Instanz.
+Der Methodenaufruf \texttt{readValue} setzt somit unter Jackson die Deserialisierung in gang.
 
 Die Schwierigkeit beim Deserialisieren besteht nun darin, dass bevor der String \"uberhaupt deserialisiert werden kann, erst festgestellt werden muss um welche Klasse es sich eigentlich handelt.
 
-Im Codebeispiel unten wird momentan noch davon ausgegangen, das es sich immer um eine Instanz der Klasse "`TestData"' handelt. Wie diese Einsch\"ankung aufgehoben werden kann, wird im folgenden Kapitel genauer beschrieben.
+Im Codebeispiel unten wird momentan noch davon ausgegangen, dass es sich immer um eine Instanz der Klasse "`TestData"' handelt. Wie diese Einsch\"ankung aufgehoben werden kann, wird im folgenden Kapitel genauer beschrieben.
 
 \lstinputlisting{Code/Jackson_des_bsp.java}
 
@@ -63,7 +88,7 @@ Wie gerade schon erkl\"autert, wird beim Deserialisieren vorausgesetzt, dass der
 
 Um den String nun eindeutig einem Typ zuzuordnen musste eine eindeutige Kennzeichnung geschaffen werden.
 
-Es wurde sich daraufhin in der Projektgruppe geeinigt, dass ein String der Klassenname \"uber ein Attribut \texttt{className} hinzugef\"ugt wird. Aus diesem Grund bekam die Klasse \texttt{OPMObject} ein String-Attribut \texttt{className} in welchem der Klassenname der jeweiligen Klasse abgelegt ist.
+Es wurde daraufhin in der Projektgruppe eine Einigung darüber getroffen, dass der Klassenname \"uber ein String-Attribut \texttt{className} hinzugef\"ugt wird. Aus diesem Grund bekam die Klasse \texttt{OPMObject} ein String-Attribut \texttt{className} in welchem der Klassenname der jeweiligen Klasse abgelegt ist.
 
 Durch die gemeinsame Wurzelklasse \texttt{OPMObject} haben nun alle Klasse das Attribut \texttt{className} geerbt. 
 Daraus ergibt sich wiederum im Umkehrschluss, dass nur noch Klassen welche von \texttt{OPMObject} erben serialisiert werden k\"onnen, da nur sie mit Sicherheit das \texttt{className}-Attribut enthalten.
@@ -71,6 +96,13 @@ Daraus ergibt sich wiederum im Umkehrschluss, dass nur noch Klassen welche von \
 Beim Serialisieren wird nun der Klassenname mit in den Ausgabe-String geschrieben und dieser kann dadurch eindeutig identifiziert werden.
 
 Um nun den Klassennamen aus den String zu lesen, wurde die neue Methode \\\texttt{getClassFileFromString} geschrieben, welche den Klassennamen aus dem String filtert und diesen dann zur\"uckliefert. Das Auslesen des Typ-Namen wurde, mit Hilfe der \texttt{split}-Methode der String-Klasse realisiert.
+
+Diese Umsetzung ist vorläufig, da sie nicht effizentgenug arbeitet.
+
+\subsubsection{JSON Parser}
+Über einen zusätzlichen "`\ac{JSON} Parser könnte der Effizenznachteil einer \texttt{split}-Methode aufgehoben werden. Hierfür gibt es unter Java verschiedene Möglichkeiten. So wäre eine Einbindung von \texttt{org.json}, \texttt{Gson}, \texttt{JSON.simple} oder \texttt{minimal-json} möglich.
+
+schau noch mal genau nach was es da von jackson gibt..............
 
 \subsection{Klassendiagramm der Serialisierung}
 

@@ -5,7 +5,7 @@ public String serialize(OPMObject opmObject) {
 
 	if (opmObject == null) {
 			throw new IllegalArgumentException("OPMObject can not be null!");
-			}
+	}
 	try {
 		return mapper.writeValueAsString(opmObject);
 	} catch (JsonProcessingException e) {
