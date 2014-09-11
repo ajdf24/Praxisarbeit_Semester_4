@@ -1,7 +1,7 @@
 \section{Objektserialisierung nach JSON}
 Wie in der Aufgabenstellung, im Kapitel \ref{Aufgabenstellung}, vorgegeben, sollen hier nun die M\"oglichkeiten einer Serialisierung von Java-Objekten, welche \ac{OPM}-konform sind, in \ac{JSON} untersucht werden.
 
-Da im Projekt alle Klassen \ac{OPM}-konform sind reicht diese Forderung aus, um alle vorkommenden Klassen serialisieren und deserialisieren zu k\"onnen.
+Da im Projekt alle Klassen \ac{OPM}-konform sind, reicht diese Forderung aus, um alle vorkommenden Klassen serialisieren und deserialisieren zu k\"onnen.
 
 \subsection{Was ist Serialisierung}
 Serialisierung ist die Abbildung von Daten auf eine geeignete Darstellungsform und wird oft bei verteilten Softwarel\"osungen, wie im Falle von \ac{GDS}, verwendet. Der erzeugte Datenstrom kann dann entweder \"uber ein Netzwerk \"ubertragen oder lokal gespeichert werden. Somit liegt das Objekt doppelt vor, zum einen als reales Objekt eines Programms und als serialisiertes Objekt. Eine \"Anderung des Objekts im Programm hat keine Auswirkung auf das serialisierte Objekt. \cite{WikiSeri}
@@ -9,75 +9,75 @@ Serialisierung ist die Abbildung von Daten auf eine geeignete Darstellungsform u
 Im Rahmen dieser Arbeit hei\ss{}t das, \ac{OPM}-konforme, strukturierte Java-Objekte in einen \ac{JSON}-Datenstrom zu wandeln. Dieser Datenstrom soll danach \"uber eine Netzwerkverbindung \"ubertragen und an anderer Stelle weiter verarbeitet werden k\"onnen.
 
 \subsection{M\"oglichkeiten der JSON-Serialisierung in Java}
-Grunds\"atzlich gibt es verschiedene M\"oglichkeiten eine \ac{JSON}-Serialisierung in Java 
-durchzuf\"uhren. Es besteht zum einen die M\"oglichkeit die n\"otige Logik und Klassen f\"ur eine \ac{JSON}-Serialisierung selber zu Implementieren oder zum anderen auf schon existierende Bibliotheken aufzubauen.
+Grunds\"atzlich gibt es verschiedene M\"oglichkeiten, eine \ac{JSON}-Serialisierung in Java 
+durchzuf\"uhren. Es besteht zum einen die M\"oglichkeit, die n\"otige Logik und Klassen f\"ur eine \ac{JSON}-Serialisierung selber zu implementieren, zum anderen auf schon existierende Bibliotheken aufzubauen.
 
 % Im folgenden werden die im Projektteam diskutierten M\"oglichkeiten genauer vorgestellt. 
 
 \subsubsection{Eigener Ansatz}
 Eine M\"oglichkeit, einen funktionsf\"ahigen Serialisierer zu erhalten, ist diesen selbst zu schreiben. Hierf\"ur m\"usste eine Lesefunktion f\"ur \ac{JSON}-Objekte implementiert werden, was auch als Scanner bezeichnet wird. 
 
-Dieser Scanner muss in der Lage sein einen \ac{JSON}-Datenstrom zu lesen und ihn in die einzelnen Bestandteile aufspalten. Dies geschieht \"ublicherweise mit Hilfe eines Baums, der beim Lesen erzeugt wird. Dieser Baum kann beim Umwandeln, also der eigentlichen Serialisierung, dann auf verschiedene Arten gepr\"uft und durchlaufen werden.
+Dieser Scanner muss in der Lage sein, einen \ac{JSON}-Datenstrom zu lesen und ihn in die einzelnen Bestandteile aufspalten. Dies geschieht \"ublicherweise mit Hilfe eines Baums, der beim Lesen erzeugt wird. Dieser Baum kann beim Umwandeln, also der eigentlichen Serialisierung, dann auf verschiedene Arten gepr\"uft und durchlaufen werden.
 
 Die Verwendung eines Baums ist wichtig, da durch ihn einfacher auf Verschachtelungen und innere Strukturen, im eingelesenen Objekt, geachtet werden kann als bei der linearen Verarbeitung. \cite{JahnBaum}
 
-Eine weitere Funktion die erf\"ullt werden muss, ist die eines Parsers. Dieser muss die einzelnen vom Scanner erkannten Bestandteile in Java-Klassen-Objekte umwandeln. Dies kann er zum Beispiel tun indem er den, vom Scanner erzeugten, Baum komplett durchl\"auft. Hierbei muss nat\"urlich auf zuvor, vom Scanner, gelesene und im Baum abgelegte Strukturen geachtet werden.
+Eine weitere Funktion, die erf\"ullt werden muss, ist die eines Parsers. Dieser muss die einzelnen vom Scanner erkannten Bestandteile in Java-Klassen-Objekte umwandeln. Dies kann er zum Beispiel tun, indem er den, vom Scanner erzeugten, Baum komplett durchl\"auft. Hierbei muss nat\"urlich auf zuvor, vom Scanner, gelesene und im Baum abgelegte Strukturen geachtet werden.
 
 Nat\"urlich muss auch die umgekehrte Richtung, also Java-Klassen-Objekte in \ac{JSON}-Objekte unterst\"utzt werden. Hierbei bleiben die Funktionen vom Scanner und Parser gleich, lediglich die Transformationsrichtung \"andert sich.
 
-Bei der Implementierung muss des weiteren zum Beispiel auf Rekursion und nicht valide \ac{JSON}-Objekte geachtet werden. So muss bestimmt werden wie tief eine Rekursion, also eine sich selbst aufrufenden Funktion im Programm, bearbeitet wird. Aber auch nicht valide JSON-Dokumente m\"ussen abgefangen werden und ein sinnvoller Fehler muss ausgegeben werden.
+Bei der Implementierung muss des Weiteren zum Beispiel auf Rekursion und nicht valide \ac{JSON}-Objekte geachtet werden. So muss bestimmt werden, wie tief eine Rekursion, also eine sich selbst aufrufenden Funktion im Programm, bearbeitet wird. Aber auch nicht valide JSON-Dokumente m\"ussen abgefangen werden und ein sinnvoller Fehler muss ausgegeben werden.
 
-Es gibt mehrere M\"oglichkeiten eine Rekursion zu l\"osen. Eine w\"are wie schon erw\"ahnt die Abhandlung bis in eine gewisse Tiefe. Es ist aber auch m\"oglich Rekursion ganz zu verbieten oder \"uber Annotationen eine Tiefe vorzugeben.
+Es gibt mehrere M\"oglichkeiten, eine Rekursion zu l\"osen. Eine w\"are, wie schon erw\"ahnt, die Abhandlung bis in eine gewisse Tiefe. Es ist aber auch m\"oglich, Rekursion ganz zu verbieten oder \"uber Annotationen eine Tiefe vorzugeben.
 % Es muss also darauf gehend gepr\"uft werden, ob irgendwo eine Rekursion vorliegt und wie diese behandelt werden soll. Dies bezieht sich nicht nur auf die lesende, sondern auch auf die schreibende Richtung.
 
 \subsubsection{Flexjson}
 Flexjson ist eine einfache Bibliothek f\"ur das Serialisieren und Deserialisieren von \ac{JSON}-Objekten in Java-Klassen-Objekte.\cite{FlexJSON}
 
-Wenn Attributnamen in \ac{JSON} von dem Deklarationsnamen im Java-Klassen-Objekt abweichen sollen, m\"ussen Annotationen verwendet werden. Diese Annotationen geben den Serialisierer Auskunft \"uber die Namen, welche er zu erwarten hat, beziehungsweise welche er schreiben muss.
+Wenn Attributnamen in \ac{JSON} von dem Deklarationsnamen im Java-Klassen-Objekt abweichen sollen, m\"ussen Annotationen verwendet werden. Diese Annotationen geben dem Serialisierer Auskunft \"uber die Namen, welche er zu erwarten hat, beziehungsweise welche er schreiben muss.
 
 Beim Serialisieren muss immer explizit angegeben werden, wenn geschachtelte Objekte mit serialisiert werden sollen und nat\"urlich auch wie tief diese verschachtelt werden sollen.
 
 In Programmiererkreisen wird Flexjson f\"ur das Debugging eingesetzt. In einer IDE gibt es leider keine M\"oglichkeit, den aktuellen Stand des Programms zu speichern, geschweige denn diesen Zustand nach gewissen Information zu durchsuchen. \cite{FlexJSONDebug}
 
-Hier kommt Flexjson ins Spiel, mit dessen Hilfe Entwickler eine Art "`Snapshot"', also eine Momentaufnahme der aktuellen Programmwerte, erstellen. Diese "`Aufnahme"' kann dann nach belieben Untersucht und gefiltert werden.
+Hier kommt Flexjson ins Spiel, mit dessen Hilfe Entwickler eine Art "`Snapshot"', also eine Momentaufnahme der aktuellen Programmwerte, erstellen. Diese "`Aufnahme"' kann dann nach Belieben untersucht und gefiltert werden.
 
 \subsubsection{Jackson}
-Jackson ist \"ahnlich wie Flexjson eine Bibliothek f\"ur die Serialisierung von Java-Objekten zu \ac{JSON}-Objekten. Vorteilhaft an Jackson ist, dass die Bibliothek modular aufgebaut ist. So wird f\"ur eine einzelne Aufgaben nicht die gesamte Bibliothek ben\"otigt. Auf die verschiedenen Module wird im Kapitel \ref{Jackson} genauer eingegangen.
+Jackson ist \"ahnlich wie Flexjson eine Bibliothek f\"ur die Serialisierung von Java-Objekten zu \ac{JSON}-Objekten. Vorteilhaft an Jackson ist, dass die Bibliothek modular aufgebaut ist. So wird f\"ur eine einzelne Aufgabe nicht die gesamte Bibliothek ben\"otigt. Auf die verschiedenen Module wird im Kapitel \ref{Jackson} genauer eingegangen.
 
-Vorteilhaft, ist die modulare Struktur von Jackson vor allem beim Binden eines Programms. Da nicht zwangsweise alle Module ben\"otigt werden, m\"ussen auch nur ben\"otigte Module in das fertige Programm eingebunden werden, was sich wiederum positiv auf die zu erwartende Gr\"o\ss{}e des Programms auswirkt.
+Vorteilhaft ist die modulare Struktur von Jackson vor allem beim Binden eines Programms. Da nicht zwangsweise alle Module ben\"otigt werden, m\"ussen auch nur ben\"otigte Module in das fertige Programm eingebunden werden, was sich wiederum positiv auf die zu erwartende Gr\"o\ss{}e des Programms auswirkt.
 \cite{Jackson}
 
-Ein weiterer Vorteil ist, dass es \"uber ein Jackson-Modul m\"oglich ist Annotationen von der \ac{JAXB} Bibliothek zu verwenden. Das
-erm\"oglicht es, f\"ur die \ac{JAXB} und Jackson Serialisierung die selben Annotationen zu nutzen. Dies w\"urde die Bearbeitung und die \"Ubersichtlichkeit sehr vereinfachen, da nicht zwei unterschiedlichen Annotationen, im Projekt, benutzt werden m\"ussen.
+Ein weiterer Vorteil ist, dass es \"uber ein Jackson-Modul m\"oglich ist, Annotations von der \ac{JAXB} Bibliothek zu verwenden. Das
+erm\"oglicht es, die gleichen Annotations zu nutzen. Dies w\"urde die Bearbeitung und die \"Ubersichtlichkeit sehr vereinfachen, da nicht zwei unterschiedliche Annotations, im Projekt, benutzt werden m\"ussen.
 
 \subsection{Auswertung der M\"oglichkeiten}
 In einer Projektgruppenberatumg wurden alle drei Vorschl\"age ausf\"uhrlich erl\"autert und diskutiert. 
 
 Vorteil des eigenen Ansatzes ist es zum einen, dass hier keine fremden Bibliotheken benutzt werden m\"ussen und so keine zus\"atzlichen "`technischen Schulden"' gemacht werden. 
 
-In der Informatik ist der Begriff der "`technischen Schulden"' eine Anspielung auf Softwarebibliotheken, die schlecht umgesetzt sind und diese schlechte Umsetzung selber ausgeglichen werden muss. Um dies ausschlie\ss{}en zu k\"onnen, m\"ussten alle genutzen Bestandteile untersucht werden. Da in der Regel nicht der Fall ist, werden "`technische Schulden"' aufgenommen weil das Gegenteil, also das die benutze Bibliothek gut entwickelt wurde, nicht bewiesen ist.
+In der Informatik ist der Begriff der "`technischen Schulden"' eine Anspielung auf Softwarebibliotheken, die schlecht umgesetzt sind und diese schlechte Umsetzung selber ausgeglichen werden muss. Um dies ausschlie\ss{}en zu k\"onnen, m\"ussten alle genutzen Bestandteile untersucht werden. Da so etwas in der Regel nicht der Fall ist, werden "`technische Schulden"' aufgenommen, weil das Gegenteil, also dass die benutzte Bibliothek gut entwickelt wurde, nicht bewiesen ist.
 
-Zum anderen ist es sehr aufw\"andig eigene Klassen f\"ur die Serialisierung und Deserialisierung zu schreiben, da sehr viele Aspekte beachtet und ber\"ucksichtig werden m\"ussen. So zum Beispiel die Rekursion oder eine Verschachtelung von Objekt-Instanzen. Auch ein Scanner, der einen geeigneten Objekt-Baum aufbaut muss entwickelt und implementiert werden. Dies ist im Rahmen dieser Arbeit leider nicht m\"oglich.
+Zum anderen ist es sehr aufw\"andig, eigene Klassen f\"ur die Serialisierung und Deserialisierung zu schreiben, da sehr viele Aspekte beachtet und ber\"ucksichtig werden m\"ussen so zum Beispiel die Rekursion oder eine Verschachtelung von Objekt-Instanzen. Auch ein Scanner, der einen geeigneten Objekt-Baum aufbaut, muss entwickelt und implementiert werden. Dies ist im Rahmen dieser Arbeit leider nicht m\"oglich.
 
 Aus diesem Grund schied der eigene Ansatz recht fr\"uh aus.
 
-Der zweite Ansatz \"uber die Flexjson Bibliothek ist interessant, und wurde in der Gruppe lange diskutiert. Denn hiermit ist es m\"oglich explizit anzugeben welche Attribute serialisiert werden sollen und welche nicht, wie es vorgesehen ist.
+Der zweite Ansatz \"uber die Flexjson-Bibliothek ist interessant, und wurde in der Gruppe lange diskutiert. Denn hiermit ist es m\"oglich, explizit anzugeben, welche Attribute serialisiert werden sollen und welche nicht, wie es vorgesehen ist.
 
-Ein Nachteil von Felxjson ist jedoch, dass es genaue Anweisungen ben\"otigt wann und wie tief es in ein Objekt mit Rekursion oder Verschachtelung hinabsteigt. Dies ist insofern nachteilig, da Quellcode mit Verschachtelung oder Rekursion durch die Annotationen, welcher ohnehin schon schwer zu verstehen ist, noch unleserlicher wird.
+Ein Nachteil von Flexjson ist jedoch, dass es genaue Anweisungen ben\"otigt wann und wie tief es in ein Objekt mit Rekursion oder Verschachtelung hinabsteigt. Dies ist insofern nachteilig, da Quellcode mit Verschachtelung oder Rekursion durch die Annotationen, welcher ohnehin schon schwer zu verstehen ist, noch unleserlicher wird.
 
-Im letzten Ansatz mit Jackson ist es, wie bei \ac{JAXB}, m\"oglich den Serialisierer \"uber Annotationen zu steuern. Vorteilhaft ist es vor allem, dass der Jackson und \ac{JAXB} Serialisierer die selben Annotationen managen kann. 
+Im letzten Ansatz mit Jackson ist es, wie bei \ac{JAXB}, m\"oglich, den Serialisierer \"uber Annotations zu steuern. Vorteilhaft ist es vor allem, dass der Jackson- und \ac{JAXB}-Serialisierer die selben Annotations managen kann. 
 
-Der gro\ss{}e Vorteil der Steuerung \"uber Annotationen ist jedoch auch ein Nachteil, den diese m\"ussen in allen Klassen angebracht werden in denen an den Attributen etwas zu beachten ist, wie das sie nicht serialisiert werden sollen. Jedoch sind Annotationen nicht zwingend notwendig, wie bei Flexjson zum Beispiel.
+Der gro\ss{}e Vorteil der Steuerung \"uber Annotationen ist jedoch auch ein Nachteil, denn diese m\"ussen in allen Klassen angebracht werden, in denen an den Attributen etwas zu beachten ist, wie das sie nicht serialisiert werden sollen. Jedoch sind Annotations nicht zwingend notwendig, wie bei Flexjson zum Beispiel.
 
-Dies war am Schluss auch das entscheidende Element warum sich f\"ur eine Umsetzung mit Jackson und \ac{JAXB} entschieden wurde. Bei der weiteren Bearbeitung wurden also wenn \"uberhaupt Annotationen von \ac{JAXB} genutzt.
+Dies war am Schluss auch das entscheidende Element, warum sich f\"ur eine Umsetzung mit Jackson und \ac{JAXB} entschieden wurde. Bei der weiteren Bearbeitung wurden also wenn \"uberhaupt Annotationen von \ac{JAXB} genutzt.
 
-Diese Arbeit behandelt jedoch nur die Jackson beziehungsweise \ac{JSON} Verarbeitung. In einer anderen Arbeit die zeitgleich entstand, ist die Verarbeitung mit \ac{JAXB} und XML zu finden. \cite{Wal14} 
+Diese Arbeit behandelt jedoch nur die Jackson- beziehungsweise \ac{JSON}-Verarbeitung. In einer anderen Arbeit, die zeitgleich entstand, ist die Verarbeitung mit \ac{JAXB} und XML zu finden. \cite{Wal14} 
 
 \subsection{Fragestellungen}
 Wie schon erw\"ahnt, sollen nicht immer alle Attribute serialisiert werden. Ob und wie dies mit Jackson m\"oglich ist, wird im weiteren Verlauf der Arbeit gekl\"art. 
 
-Das ist dann Interessant, wenn die Klasse statische Attribute oder Attribute, welche sich im Programmverlauf nicht \"andern, enth\"alt. Da diese Attribute immer gleich sind und ihr Ausgangswert bekannt ist, muss dieser nicht serialisiert, versendet oder abgespeichert werden.
+Das ist dann interessant, wenn die Klasse statische Attribute oder Attribute, welche sich im Programmverlauf nicht \"andern, enth\"alt. Da diese Attribute immer gleich sind und ihr Ausgangswert bekannt ist, muss dieser nicht serialisiert, versendet oder abgespeichert werden.
 
-Des weiteren kam die Frage auf, ob es m\"oglich ist Klassenattribute gesondert zu Serialisieren und gegebenenfalls zu untersuchen wie sich dies auf die Serialisierungs- beziehungsweise Deserialisierungsgeschwindigkeit auswirkt.
+Des Weiteren kam die Frage auf, ob es m\"oglich ist, Klassenattribute gesondert zu serialisieren und gegebenenfalls zu untersuchen, wie sich dies auf die Serialisierungs- beziehungsweise Deserialisierungsgeschwindigkeit auswirkt.
 
 Diese Frage ist aufgetreten, da beim Serialisieren gegebenenfalls viele Klassenattribute mit serialiert werden, die nicht mit \"ubertragen, gespeichert oder verwendet werden sollen. 

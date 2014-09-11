@@ -1,18 +1,17 @@
 \section{Bewertung und Vergleich zwischen JAXB und Jackson}
 Im folgenden wird eine vergleichende Bewertung von Jackson und JAXB vorgenommen und eine Empfehlung abgegeben.
 
-Die vorliegende Arbeite behandelte nur die Serialisierung von Java-Instanzen mit der Hilfe von Jackson in JSON-Dokumente. Jedoch wurde in einer anderen Arbeit die Serialisierung von Java-Instanzen in XML-Dokumente mittels JAXB untersucht auf die sich diese Arbeit immer wieder bezieht.\cite{Wal14}
+Die vorliegende Arbeite behandelte nur die Serialisierung von Java-Instanzen mit der Hilfe von Jackson in \ac{JSON}-Dokumente. Jedoch wurde in einer anderen Arbeit die Serialisierung von Java-Instanzen in XML-Dokumente mittels JAXB untersucht auf die sich diese Arbeit immer wieder bezieht.\cite{Wal14}
 
-Eine Serialisierung in Jackson-Dokumente anstelle von XML-Dokumente bringt zum einen den Vorteil das JSON-Dokumente immer Java und JavaScript konform sind. Zum anderen ist JSON durch einen geringeren Metadaten-Overhead im Regelfall kleiner als ein entsprechendes XML-Dokument. 
+Eine Serialisierung in Jackson-Dokumente anstelle von XML-Dokumente bringt zum einen den Vorteil, dass \ac{JSON}-Dokumente immer Java und JavaScript konform sind. Zum anderen ist \ac{JSON} durch einen geringeren Metadaten-Overhead im Regelfall kleiner als ein entsprechendes XML-Dokument. 
 
-Nachteilig an Jackson ist, dass es nicht wie JAXB nativer Bestandteil der Java-Bibliothek ist. Deshalb werden bei der Verwendung von Jackson zus\"atzliche Java-Bibliotheken ben\"otigt. Dieser Nachteil kann selbst durch das modulare System von Jackson nicht aufgehoben werden, denn durch die Auslangerung vom "`Jackson-Core"' aus anderen Jackson-Bestandteilen sind immer mindesten zwei Elemente n\"otig. 
-% Zum einen der Core und die aufgabenspezifischen Bibliotheken.
+Nachteilig an Jackson ist, dass es nicht wie JAXB nativer Bestandteil der Java-Bibliothek ist. Deshalb werden bei der Verwendung von Jackson zus\"atzliche Java-Bibliotheken ben\"otigt. Dieser Nachteil kann selbst durch das modulare System von Jackson nicht aufgehoben werden, denn durch die Auslangerung vom "`Jackson-Core"' aus anderen Jackson-Bestandteilen sind immer mindesten zwei Module n\"otig. 
 
-Beide Ans\"atze Jackson und JAXB ben\"otigen f\"ur die Steuerung der Serialisierer Annotationen. Dieser Ansatz ist weit verbreitet und findet oft bei anderen Bibliotheken Anwendung, wie zum Beispiel "`JPA"' einer Datenbankbibliothek. Der Vorteil von Jackson ist, das es nicht nur in der Lage ist, eigene Annotationen zu verstehen, sondern mit zus\"atzlichen Bibliotheken k\"onnen auch andere Annotationen verstanden und verwendet werden. 
+Beide Ans\"atze Jackson und JAXB ben\"otigen f\"ur die Steuerung der Serialisierer Annotations. Dieser Ansatz ist weit verbreitet und findet auch oft bei anderen Bibliotheken Anwendung, wie zum Beispiel "`JPA"' einer Datenbankbibliothek. Der Vorteil von Jackson ist, dass es nicht nur in der Lage ist, eigene Annotations zu verstehen, sondern mit zus\"atzlichen Bibliotheken k\"onnen auch andere Annotations verstanden und verwendet werden. 
 
-JAXB hingegen hat keine M\"oglichkeit auf andere Annotationen zu reagieren und somit m\"ussen bei der Verwendung von mehreren Serialisierern entweder JAXB-Annotationen genutzt werden oder es m\"ussen verschiedene Annotationen Verwendung finden.
+JAXB hingegen hat keine M\"oglichkeit auf andere Annotationen zu reagieren und somit m\"ussen bei der Verwendung von mehreren verschiedenen Serialisierern entweder JAXB-Annotationen genutzt werden oder es m\"ussen verschiedene Annotations Verwendung finden.
 
-Im direkten Vergleich ist Jackson etwas langsamer als JAXB, jedoch befinden sich die Unterschiede hier im Millisekundenbereich. Diese k\"onnten jedoch beim \"Ubertragen durch die geringere Gr\"o\ss{}e von JSON aufgehoben werden.
+Im direkten Vergleich ist Jackson etwas langsamer als JAXB, jedoch befinden sich die Unterschiede hier im Millisekundenbereich. Diese k\"onnten jedoch beim \"Ubertragen durch die geringere Gr\"o\ss{}e von \ac{JSON} aufgehoben werden.
 
 Ein weiterer Vorteil ist auch, dass Jackson besser mit gro\ss{}en Dateien umgehen kann und sp\"atestens hier Geschwindigkeitsvorteile bietet.
 
