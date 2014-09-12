@@ -9,7 +9,7 @@ kile_livePreviewStatusUserSpecified=false
 kile_livePreviewTool=LivePreview-PDFLaTeX
 kileprversion=2
 kileversion=2.9.60
-lastDocument=Test.tex
+lastDocument=Zusammenfassung.tex
 masterDocument=
 name=Praxisarbeit_Semester_4
 pkg_extIsRegExp=false
@@ -160,7 +160,7 @@ order=2
 
 [item:Bewertung.tex]
 archive=true
-column=399
+column=218
 encoding=ISO-8859-1
 highlight=LaTeX
 line=9
@@ -213,7 +213,7 @@ archive=true
 column=0
 encoding=ISO-8859-1
 highlight=LaTeX
-line=181
+line=189
 mode=LaTeX
 open=true
 order=0
@@ -250,10 +250,10 @@ order=9
 
 [item:Zusammenfassung.tex]
 archive=true
-column=39
+column=215
 encoding=ISO-8859-1
 highlight=LaTeX
-line=24
+line=25
 mode=LaTeX
 open=true
 order=11
@@ -281,7 +281,7 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Bewertung.tex]
-CursorColumn=399
+CursorColumn=218
 CursorLine=9
 JumpList=
 ViMarks=
@@ -312,7 +312,7 @@ ViMarks=
 
 [view-settings,view=0,item:Praxisarbeit_Semester_4.tex]
 CursorColumn=0
-CursorLine=181
+CursorLine=189
 JumpList=
 ViMarks=
 
@@ -335,8 +335,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Zusammenfassung.tex]
-CursorColumn=39
-CursorLine=24
+CursorColumn=215
+CursorLine=25
 JumpList=
 ViMarks=
 
