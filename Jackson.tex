@@ -38,14 +38,14 @@ Wie eine Schemaerzeugung genau funktioniert, wird im Kapitel \ref{JSON-Schema} g
 \subsection{Serialisierung mit Jackson}\label{Serialisierung}
 Der im folgenden beschriebene Sachverhalt erl\"autert das Quellcode-Listing auf der nächsten Seite.
 
-Um eine Serialisierung mit Jackson umzusetzen, wird zuerst eine Instanz der Klasse \\\texttt{ObjectMapper} ben\"otigt, welche den Databinder darstellt, welcher, wie schon dargestellt, den Datenstrom verarbeitet. Dieser \texttt{mapper} ist somit f\"ur die Konvertierung von Java-Instanzen zu JSON-Dokumenten verantwortlich. Das zu serialisierende Objekt ist im Beispiel \texttt{opmObject}, welches der Methode \texttt{serialize} \"ubergeben wird.
+Um eine \textit{Minimal Exception Safety} zu garantieren wird nun eine \texttt{null}-Abfrage des zu serialisierenden Elements (\texttt{opmObject}) gemacht. Mit dieser Stufe der Sicherheit soll nicht verhindert werden, dass eine Exception passiert. Es wird lediglich garantiert, dass die Methode ohne abzust\"urzen durchlaufen werden kann. \cite{ExceptionSafety}
+
+Um nun eine Serialisierung mit Jackson umzusetzen, wird zuerst eine Instanz der Klasse \\\texttt{ObjectMapper} ben\"otigt, welche den Databinder darstellt, welcher, wie schon dargestellt, den Datenstrom verarbeitet. Dieser \texttt{mapper} ist somit f\"ur die Konvertierung von Java-Instanzen zu JSON-Dokumenten verantwortlich. Das zu serialisierende Objekt ist im Beispiel \texttt{opmObject}, welches der Methode \texttt{serialize} \"ubergeben wird.
 
 Jedoch wird nicht nur der \texttt{mapper} ben\"otigt, sondern auch ein \texttt{AnnotationInspector}, der jedoch abstrakt ist. Der \texttt{inspector} wird deshalb als Instanz von \texttt{JaxbAnnotationInspector} erstellt, was durch eine Implementierung der abstrakten Klasse m\"oglich ist. 
 Weiterführende Überlegungen zum \texttt{AnnotationInspector} sind im Kapitel \ref{SMDAnnotationInsector} näher erläutert.
 
 Dem \texttt{inspector} wird eine \texttt{TypeFactory} mit "`Default-Einstellungen"' \"ubergeben . Dies bedeutet, es wird auf die Original JAXB-Annotations geparst, ohne auf Sonderf\"alle zu achten. Andere Annotations werden nicht ber\"ucksichtigt. Der \texttt{inspector} wird schlie\ss{}lich, nach der Erstellung, dem \texttt{mapper} \"ubergeben, damit dieser auf die entsprechnden Annotations reagieren kann.
-
-Um eine \textit{Minimal Exception Safety} zu garantieren wird nun eine \texttt{null}-Abfrage des zu serialisierenden Elements (\texttt{opmObject}) gemacht. Mit dieser Stufe der Sicherheit soll nicht verhindert werden, dass eine Exception passiert. Es wird lediglich garantiert, dass die Methode ohne abzust\"urzen durchlaufen werden kann. \cite{ExceptionSafety}
 
 Ist die zu serialisierende Instanz \texttt{null}, so wird eine \texttt{IllegalagumentException} generiert und die Methode so ordnungsgem\"a\ss{} beendet. Ist eine Instanz vorhanden, wird diese dem \texttt{mapper} \"ubergeben. Das Ergebnis des Aufrufs der Methode \texttt{writeValueAsString} von der Klasse \texttt{ObjectMapper} ist entweder bei Erfolg ein valider JSON-String oder beim Scheitern eine \\\texttt{JsonProcessingException}. 
 
@@ -53,7 +53,7 @@ Eine \texttt{JsonProcessingException} wird generiert, wenn Probleme beim parsen,
 
 Über den Methodenaufruf \texttt{writeValueAsString} wird also der Serialisierungsprozess mit der Jackson-Bibliothek in Gang gesetzt.
 
-Aus Gründen der Verständlichkeit, wurde die \texttt{null}-Abfrage nicht am Methodenanfang gemacht, um bei einer Fehleingabe die Methode frühestmöglich zu verlassen, ohne vorher Objekte zu erstellen.
+% Aus Gründen der Verständlichkeit, wurde die \texttt{null}-Abfrage nicht am Methodenanfang gemacht, um bei einer Fehleingabe die Methode frühestmöglich zu verlassen, ohne vorher Objekte zu erstellen.
 \newpage
 \lstinputlisting{Code/Jackson_bsp.java}
 
@@ -97,7 +97,7 @@ Um nun den Klassennamen aus dem String zu lesen, wurde die neue Methode \\\textt
 
 Diese Umsetzung ist vorläufig, da sie nicht effizient genug arbeitet, jedoch wesentlich schneller als Jacksons eigenes Parsen auf einen Schl\"usselnamen ist.\cite{Mkyong}
 
-\subsubsection{JSON-Parser}
+% \subsubsection{JSON-Parser}
 Über einen zusätzlichen \ac{JSON}-Parser könnte der Effizenznachteil einer \texttt{split}-Methode, oder des Jackson-Parsers aufgehoben werden. Hierfür gibt es unter Java verschiedene Möglichkeiten. So wäre eine Einbindung von \texttt{org.json}, \texttt{Gson}, \texttt{JSON.simple} oder \texttt{minimal-json} möglich.\cite{EclipseSource}
 
 Aus zeitlichen Gr\"unden, konnten keine Untersuchungen zu weiteren \ac{JSON}-Parsern gemacht werden. Jedoch wurde im Zuge der instanzunabhängigen Deserialisierung der Jackson-Parser getestet und f\"ur untauglich befunden, da er mindestens die zehnfache Zeit der \texttt{split}-Methode ben\"otigt.

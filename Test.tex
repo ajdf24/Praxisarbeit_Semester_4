@@ -68,9 +68,11 @@ Derselbe Dateninhalt, jedoch rekursiv aufgerufen, brauchte zum Serialisieren 343
 Das Serialisieren der gro\ss{}en Klasse ben\"otigte 10632, 10751 und 10521 Millisekunden. Zum Deserialisieren wurde eine Zeit von 17012, 16836 und 17127 Millisekunden ben\"otigt.
 
 \subsection{Auswertung der Testergebnisse}
-Aus der Serialisierung der gro\ss{}en Klasse l\"asst sich sehr gut entnehmen, dass die Serialisierung eines einzelnen Elements quasi keine Zeit in Anspruch nimmt, denn die Zeit f\"ur ein Element liegt bei $7,67111*10^{-5}$ Millisekunden.
+Aus der Serialisierung der gro\ss{}en Klasse l\"asst sich sehr gut entnehmen, dass die Serialisierung eines einzelnen Elements quasi keine Zeit in Anspruch nimmt, denn die Zeit f\"ur ein Element liegt bei $7,67111*10^{-5}$ Millisekunden. Hierbei wurde das arithmetische Mittel der Messzeit, durch die Anzahl der Werte im Array geteilt.
 
-\"Uber Jackson kann also ausgesagt werden, dass das Starten des Serialisierungsprozesses in etwa 336 Millisekunden dauert, da das Serialisieren einer Klasse mit einem Attribut im Mittel diese Zeit ben\"otigt und somit die Serialisierung dieses Attributs vernachl\"assigt werden kann, da es quasi keine Zeit in Anspruch nimmt, wie die Serialisierung der gro\ss{}en Klasse gezeigt hat.
+\"Uber Jackson kann, mit Hilfe der Ergebnisse der gr\"o\ss{}en Testklasse, ausgesagt werden dass, der Anlauf der Serialisierung in etwa 336 Millisekunden ben\"otigt. Diese Aussage ist m\"oglich, da mit Hilfe der gro\ss{}en Klasse gezeigt wurde das f\"ur die Serialisierung eines Elements kaum Zeit ben\"otigt wird.
+
+% \"Uber Jackson kann also ausgesagt werden, dass das Starten des Serialisierungsprozesses in etwa 336 Millisekunden dauert, da das Serialisieren einer Klasse mit einem Attribut im Mittel diese Zeit ben\"otigt und somit die Serialisierung dieses Attributs, unter der oben genannten Zeit von $7,67111*10^{-5}$,  vernachl\"assigt werden kann, da es quasi keine Zeit in Anspruch nimmt, wie die Serialisierung der gro\ss{}en Klasse gezeigt hat.
 
 Auch durch die folgenden Ergebnisse ist diese Aussage  m\"oglich. Da auch eine Klasse mit mehreren Elementen (Klasse mit jeweils einem Attribut von jedem Datentyp) mit 348,3 Millisekunden eine \"ahnlich lange Zeit ben\"otigt, wie die Klasse mit einem Element.
 
@@ -79,7 +81,6 @@ Auch das Serialisieren und Deserialisieren von Klassenattributen und Rekursion w
 Hier kommt auch gut zur Geltung, wie stark Java optimieren kann, denn bei der kleinen Klasse wird f\"ur jedes Element im Schnitt eine Millisekunde ben\"otigt, was im krassen Gegensatz zu 0,000071 Millisekunden steht. Diese extreme Beschleunigung wird zum einen durch Caching-Mechanismen, zum anderen auch vom JIT-Compiler und der daraus folgenden Parallelisierung hervorgerufen. 
 
 Welche Mechanismen wo genau ansetzten und wie sie im speziellen angewendet werden, wurde im Rahmen dieser Arbeit nicht untersucht.
-
 Bei langen Strings dauert das Deserialisieren pl\"otzlich l\"anger als das Serialisieren, was daher r\"uhrt, dass bei der Klassennamensuche der komplette String durchlaufen werden muss.
 
 \subsection{Zusammenfassung der Testergebnisse}

@@ -9,7 +9,7 @@ kile_livePreviewStatusUserSpecified=false
 kile_livePreviewTool=LivePreview-PDFLaTeX
 kileprversion=2
 kileversion=2.9.60
-lastDocument=Zusammenfassung.tex
+lastDocument=Test.tex
 masterDocument=
 name=Praxisarbeit_Semester_4
 pkg_extIsRegExp=false
@@ -140,10 +140,10 @@ Mode=LaTeX
 
 [item:Abkuerzungen.tex]
 archive=true
-column=27
+column=48
 encoding=ISO-8859-1
 highlight=LaTeX
-line=11
+line=3
 mode=LaTeX
 open=true
 order=5
@@ -190,10 +190,10 @@ order=3
 
 [item:Jackson.tex]
 archive=true
-column=362
+column=26
 encoding=ISO-8859-1
 highlight=LaTeX
-line=189
+line=99
 mode=LaTeX
 open=true
 order=7
@@ -210,20 +210,20 @@ order=6
 
 [item:Praxisarbeit_Semester_4.tex]
 archive=true
-column=0
+column=14
 encoding=ISO-8859-1
 highlight=LaTeX
-line=189
+line=219
 mode=LaTeX
 open=true
 order=0
 
 [item:Quellen.bib]
 archive=true
-column=18
+column=37
 encoding=ISO-8859-1
 highlight=BibTeX
-line=77
+line=2
 mode=BibTeX
 open=true
 order=4
@@ -240,20 +240,20 @@ order=8
 
 [item:Test.tex]
 archive=true
-column=144
+column=130
 encoding=ISO-8859-1
 highlight=LaTeX
-line=87
+line=82
 mode=LaTeX
 open=true
 order=9
 
 [item:Zusammenfassung.tex]
 archive=true
-column=215
+column=243
 encoding=ISO-8859-1
 highlight=LaTeX
-line=25
+line=9
 mode=LaTeX
 open=true
 order=11
@@ -269,8 +269,8 @@ open=false
 order=-1
 
 [view-settings,view=0,item:Abkuerzungen.tex]
-CursorColumn=27
-CursorLine=11
+CursorColumn=48
+CursorLine=3
 JumpList=
 ViMarks=
 
@@ -299,8 +299,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Jackson.tex]
-CursorColumn=362
-CursorLine=189
+CursorColumn=26
+CursorLine=99
 JumpList=
 ViMarks=
 
@@ -311,14 +311,14 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Praxisarbeit_Semester_4.tex]
-CursorColumn=0
-CursorLine=189
+CursorColumn=14
+CursorLine=219
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Quellen.bib]
-CursorColumn=18
-CursorLine=77
+CursorColumn=37
+CursorLine=2
 JumpList=
 ViMarks=
 
@@ -329,14 +329,14 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Test.tex]
-CursorColumn=144
-CursorLine=87
+CursorColumn=130
+CursorLine=82
 JumpList=
 ViMarks=
 
 [view-settings,view=0,item:Zusammenfassung.tex]
-CursorColumn=215
-CursorLine=25
+CursorColumn=243
+CursorLine=9
 JumpList=
 ViMarks=
 
